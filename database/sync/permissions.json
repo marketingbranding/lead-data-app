@@ -1,0 +1,667 @@
+[
+    {
+        "id": 1,
+        "name": "banks.view-any",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 2,
+        "name": "banks.view",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 3,
+        "name": "banks.create",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 4,
+        "name": "banks.update",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 5,
+        "name": "banks.delete",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 6,
+        "name": "kavlings.view-any",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 7,
+        "name": "kavlings.view",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 8,
+        "name": "kavlings.create",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 9,
+        "name": "kavlings.update",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 10,
+        "name": "kavlings.delete",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 11,
+        "name": "sales.view-any",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 12,
+        "name": "sales.view",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 13,
+        "name": "sales.create",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 14,
+        "name": "sales.update",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 15,
+        "name": "sales.delete",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 16,
+        "name": "promos.view-any",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 17,
+        "name": "promos.view",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 18,
+        "name": "promos.create",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 19,
+        "name": "promos.update",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 20,
+        "name": "promos.delete",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 21,
+        "name": "konsumens.view-any",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 22,
+        "name": "konsumens.view",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 23,
+        "name": "konsumens.create",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 24,
+        "name": "konsumens.update",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 25,
+        "name": "konsumens.delete",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 26,
+        "name": "bi-checkings.view-any",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 27,
+        "name": "bi-checkings.view",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 28,
+        "name": "bi-checkings.create",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 29,
+        "name": "bi-checkings.update",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 30,
+        "name": "bi-checkings.delete",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 31,
+        "name": "psjbs.view-any",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 32,
+        "name": "psjbs.view",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 33,
+        "name": "psjbs.create",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 34,
+        "name": "psjbs.update",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 35,
+        "name": "psjbs.delete",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 36,
+        "name": "pemberkasans.view-any",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 37,
+        "name": "pemberkasans.view",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 38,
+        "name": "pemberkasans.create",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 39,
+        "name": "pemberkasans.update",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 40,
+        "name": "pemberkasans.delete",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 41,
+        "name": "proses-banks.view-any",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 42,
+        "name": "proses-banks.view",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 43,
+        "name": "proses-banks.create",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 44,
+        "name": "proses-banks.update",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 45,
+        "name": "proses-banks.delete",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 46,
+        "name": "ppjb-devs.view-any",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 47,
+        "name": "ppjb-devs.view",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 48,
+        "name": "ppjb-devs.create",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 49,
+        "name": "ppjb-devs.update",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 50,
+        "name": "ppjb-devs.delete",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 51,
+        "name": "akads.view-any",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 52,
+        "name": "akads.view",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 53,
+        "name": "akads.create",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 54,
+        "name": "akads.update",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 55,
+        "name": "akads.delete",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 56,
+        "name": "basts.view-any",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 57,
+        "name": "basts.view",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 58,
+        "name": "basts.create",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 59,
+        "name": "basts.update",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 60,
+        "name": "basts.delete",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 61,
+        "name": "expenses.view-any",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 62,
+        "name": "expenses.view",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 63,
+        "name": "expenses.create",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 64,
+        "name": "expenses.update",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 65,
+        "name": "expenses.delete",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 66,
+        "name": "pipeline-logs.view-any",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 67,
+        "name": "pipeline-logs.view",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 68,
+        "name": "pipeline-logs.create",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 69,
+        "name": "pipeline-logs.update",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 70,
+        "name": "pipeline-logs.delete",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 71,
+        "name": "lead-times.view-any",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:40",
+        "updated_at": "2026-05-21 07:53:40"
+    },
+    {
+        "id": 72,
+        "name": "lead-times.view",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:41",
+        "updated_at": "2026-05-21 07:53:41"
+    },
+    {
+        "id": 73,
+        "name": "lead-times.create",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:41",
+        "updated_at": "2026-05-21 07:53:41"
+    },
+    {
+        "id": 74,
+        "name": "lead-times.update",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:41",
+        "updated_at": "2026-05-21 07:53:41"
+    },
+    {
+        "id": 75,
+        "name": "lead-times.delete",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:41",
+        "updated_at": "2026-05-21 07:53:41"
+    },
+    {
+        "id": 76,
+        "name": "roles.view-any",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:41",
+        "updated_at": "2026-05-21 07:53:41"
+    },
+    {
+        "id": 77,
+        "name": "roles.view",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:41",
+        "updated_at": "2026-05-21 07:53:41"
+    },
+    {
+        "id": 78,
+        "name": "roles.create",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:41",
+        "updated_at": "2026-05-21 07:53:41"
+    },
+    {
+        "id": 79,
+        "name": "roles.update",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:41",
+        "updated_at": "2026-05-21 07:53:41"
+    },
+    {
+        "id": 80,
+        "name": "roles.delete",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:41",
+        "updated_at": "2026-05-21 07:53:41"
+    },
+    {
+        "id": 81,
+        "name": "permissions.view-any",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:41",
+        "updated_at": "2026-05-21 07:53:41"
+    },
+    {
+        "id": 82,
+        "name": "permissions.view",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:41",
+        "updated_at": "2026-05-21 07:53:41"
+    },
+    {
+        "id": 83,
+        "name": "permissions.create",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:41",
+        "updated_at": "2026-05-21 07:53:41"
+    },
+    {
+        "id": 84,
+        "name": "permissions.update",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:41",
+        "updated_at": "2026-05-21 07:53:41"
+    },
+    {
+        "id": 85,
+        "name": "permissions.delete",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:41",
+        "updated_at": "2026-05-21 07:53:41"
+    },
+    {
+        "id": 86,
+        "name": "users.view-any",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:41",
+        "updated_at": "2026-05-21 07:53:41"
+    },
+    {
+        "id": 87,
+        "name": "users.view",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:41",
+        "updated_at": "2026-05-21 07:53:41"
+    },
+    {
+        "id": 88,
+        "name": "users.create",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:41",
+        "updated_at": "2026-05-21 07:53:41"
+    },
+    {
+        "id": 89,
+        "name": "users.update",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:41",
+        "updated_at": "2026-05-21 07:53:41"
+    },
+    {
+        "id": 90,
+        "name": "users.delete",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:41",
+        "updated_at": "2026-05-21 07:53:41"
+    },
+    {
+        "id": 91,
+        "name": "cabangs.view-any",
+        "guard_name": "web",
+        "created_at": "2026-05-21 08:44:29",
+        "updated_at": "2026-05-21 08:44:29"
+    },
+    {
+        "id": 92,
+        "name": "cabangs.view",
+        "guard_name": "web",
+        "created_at": "2026-05-21 08:44:29",
+        "updated_at": "2026-05-21 08:44:29"
+    },
+    {
+        "id": 93,
+        "name": "cabangs.create",
+        "guard_name": "web",
+        "created_at": "2026-05-21 08:44:29",
+        "updated_at": "2026-05-21 08:44:29"
+    },
+    {
+        "id": 94,
+        "name": "cabangs.update",
+        "guard_name": "web",
+        "created_at": "2026-05-21 08:44:29",
+        "updated_at": "2026-05-21 08:44:29"
+    },
+    {
+        "id": 95,
+        "name": "cabangs.delete",
+        "guard_name": "web",
+        "created_at": "2026-05-21 08:44:29",
+        "updated_at": "2026-05-21 08:44:29"
+    }
+]

@@ -1,0 +1,35 @@
+[
+    {
+        "id": 1,
+        "name": "Admin",
+        "email": "admin@leaddata.com",
+        "email_verified_at": null,
+        "password": "$2y$12$fREzuwEQkFWv1BEV07E3yO1JQYDRz4bPxILJKgUx2fpYnWF18Jv9K",
+        "remember_token": "ROBsXu0VsrGZfaJTnzdZhPbM2yxI6012ckR5tR05Pa8WvCyGLxWvx0c6zd7S",
+        "created_at": "2026-05-21 06:46:36",
+        "updated_at": "2026-05-21 06:46:36",
+        "cabang_id": null
+    },
+    {
+        "id": 2,
+        "name": "Cabang Magelang",
+        "email": "admin@magelang.com",
+        "email_verified_at": null,
+        "password": "$2y$12$uXDcqrKI8\/Ip74z0ixxMEespv1pdPm2HjfQX5OJD7sGQyha7AHWw.",
+        "remember_token": null,
+        "created_at": "2026-05-21 08:59:45",
+        "updated_at": "2026-05-21 08:59:45",
+        "cabang_id": 4
+    },
+    {
+        "id": 3,
+        "name": "Cabang Jepara",
+        "email": "admin@jepara.com",
+        "email_verified_at": null,
+        "password": "$2y$12$ZCV60nEFM7gJ6kzqc96lNufMJ69lOlRavlRXfZWNaJKAzOoPlBaRO",
+        "remember_token": null,
+        "created_at": "2026-05-21 09:01:03",
+        "updated_at": "2026-05-21 09:01:03",
+        "cabang_id": 7
+    }
+]

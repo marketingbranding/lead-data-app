@@ -1,0 +1,56 @@
+[
+    {
+        "id_lead_time": 1,
+        "tahap_awal": "bi_checking",
+        "tahap_tujuan": "psjb",
+        "proses": "bi_checking - psjb",
+        "target_hari_kerja": 1,
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "id_lead_time": 2,
+        "tahap_awal": "psjb",
+        "tahap_tujuan": "pemberkasan",
+        "proses": "psjb -pemberkasan",
+        "target_hari_kerja": 3,
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "id_lead_time": 3,
+        "tahap_awal": "pemberkasan",
+        "tahap_tujuan": "proses bank",
+        "proses": "pemberkasan - proses bank",
+        "target_hari_kerja": 10,
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "id_lead_time": 4,
+        "tahap_awal": "Proses bank",
+        "tahap_tujuan": "ppjb_dev",
+        "proses": "Proses bank - ppjb_dev",
+        "target_hari_kerja": 10,
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "id_lead_time": 5,
+        "tahap_awal": "ppjb_dev",
+        "tahap_tujuan": "akad",
+        "proses": "ppjb_dev - akad",
+        "target_hari_kerja": 3,
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "id_lead_time": 6,
+        "tahap_awal": "rumah ready 100%",
+        "tahap_tujuan": "bast",
+        "proses": "rumah ready 100% - bast",
+        "target_hari_kerja": 1,
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    }
+]

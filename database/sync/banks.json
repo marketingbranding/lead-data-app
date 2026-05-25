@@ -1,0 +1,86 @@
+[
+    {
+        "id_bank": 1,
+        "bank": "BTN",
+        "kc_unit": "Jepara",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "id_bank": 2,
+        "bank": "BTN",
+        "kc_unit": "Kudus",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "id_bank": 3,
+        "bank": "BTN",
+        "kc_unit": "Pati",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "id_bank": 4,
+        "bank": "BNI",
+        "kc_unit": "Jepara",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "id_bank": 5,
+        "bank": "BSN",
+        "kc_unit": "Kudus",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "id_bank": 6,
+        "bank": "BANK BRI",
+        "kc_unit": "Jepara",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "id_bank": 7,
+        "bank": "BANK JATENG",
+        "kc_unit": "Jepara",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "id_bank": 8,
+        "bank": "BANK JATENG",
+        "kc_unit": "Bangsri",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "id_bank": 9,
+        "bank": "BANK JATENG",
+        "kc_unit": "Pasar Jepara",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "id_bank": 10,
+        "bank": "MANDIRI",
+        "kc_unit": "Kudus",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "id_bank": 11,
+        "bank": "MANDIRI",
+        "kc_unit": "Jepara",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "id_bank": 12,
+        "bank": "DKI SYARIAH",
+        "kc_unit": "Semarang",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    }
+]

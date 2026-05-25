@@ -1,0 +1,240 @@
+[
+    {
+        "id": 4,
+        "nama_proyek": "Marison Jabung Malang",
+        "cabang_id": 1,
+        "created_at": null,
+        "updated_at": null
+    },
+    {
+        "id": 5,
+        "nama_proyek": "Marison Wagir",
+        "cabang_id": 1,
+        "created_at": null,
+        "updated_at": null
+    },
+    {
+        "id": 6,
+        "nama_proyek": "Marison Madiun 2 Perluasan",
+        "cabang_id": 2,
+        "created_at": null,
+        "updated_at": null
+    },
+    {
+        "id": 7,
+        "nama_proyek": "Marison Teras Boyolali",
+        "cabang_id": 3,
+        "created_at": null,
+        "updated_at": null
+    },
+    {
+        "id": 8,
+        "nama_proyek": "Marison Jeruksawit 4",
+        "cabang_id": 3,
+        "created_at": null,
+        "updated_at": null
+    },
+    {
+        "id": 9,
+        "nama_proyek": "Marison Wonogiri",
+        "cabang_id": 3,
+        "created_at": null,
+        "updated_at": null
+    },
+    {
+        "id": 10,
+        "nama_proyek": "Marison Sragen",
+        "cabang_id": 3,
+        "created_at": null,
+        "updated_at": null
+    },
+    {
+        "id": 11,
+        "nama_proyek": "Marison Wonosari Js",
+        "cabang_id": 3,
+        "created_at": null,
+        "updated_at": null
+    },
+    {
+        "id": 12,
+        "nama_proyek": "Marison Rejosari Gondangrejo",
+        "cabang_id": 3,
+        "created_at": null,
+        "updated_at": null
+    },
+    {
+        "id": 13,
+        "nama_proyek": "Marison Musuk Boyolali",
+        "cabang_id": 3,
+        "created_at": null,
+        "updated_at": null
+    },
+    {
+        "id": 14,
+        "nama_proyek": "Marison Wonosari",
+        "cabang_id": 4,
+        "created_at": null,
+        "updated_at": null
+    },
+    {
+        "id": 15,
+        "nama_proyek": "Marison Wonosari Kios",
+        "cabang_id": 4,
+        "created_at": null,
+        "updated_at": null
+    },
+    {
+        "id": 16,
+        "nama_proyek": "Marison Piyungan",
+        "cabang_id": 4,
+        "created_at": null,
+        "updated_at": null
+    },
+    {
+        "id": 17,
+        "nama_proyek": "Marison Jonggrangan",
+        "cabang_id": 4,
+        "created_at": null,
+        "updated_at": null
+    },
+    {
+        "id": 18,
+        "nama_proyek": "Marison Dlimas Tegalrejo",
+        "cabang_id": 4,
+        "created_at": null,
+        "updated_at": null
+    },
+    {
+        "id": 19,
+        "nama_proyek": "Marison Tampingan Tegalrejo",
+        "cabang_id": 4,
+        "created_at": null,
+        "updated_at": null
+    },
+    {
+        "id": 20,
+        "nama_proyek": "Marison Sidoagung Tempuran",
+        "cabang_id": 4,
+        "created_at": null,
+        "updated_at": null
+    },
+    {
+        "id": 21,
+        "nama_proyek": "Marison Piyaman Wonosari",
+        "cabang_id": 4,
+        "created_at": null,
+        "updated_at": null
+    },
+    {
+        "id": 22,
+        "nama_proyek": "Marison Cawang",
+        "cabang_id": 4,
+        "created_at": null,
+        "updated_at": null
+    },
+    {
+        "id": 23,
+        "nama_proyek": "Mutiara Garden 5",
+        "cabang_id": 5,
+        "created_at": null,
+        "updated_at": "2026-05-25 02:40:36"
+    },
+    {
+        "id": 24,
+        "nama_proyek": "Marison Sokawera Purwokerto",
+        "cabang_id": 6,
+        "created_at": null,
+        "updated_at": null
+    },
+    {
+        "id": 25,
+        "nama_proyek": "Marison Mlonggo 1",
+        "cabang_id": 7,
+        "created_at": null,
+        "updated_at": null
+    },
+    {
+        "id": 26,
+        "nama_proyek": "Marison Regency Jepara 2",
+        "cabang_id": 7,
+        "created_at": null,
+        "updated_at": null
+    },
+    {
+        "id": 27,
+        "nama_proyek": "Marison Regency Kuwasen",
+        "cabang_id": 7,
+        "created_at": null,
+        "updated_at": null
+    },
+    {
+        "id": 28,
+        "nama_proyek": "Marison Mranggen",
+        "cabang_id": 7,
+        "created_at": null,
+        "updated_at": null
+    },
+    {
+        "id": 29,
+        "nama_proyek": "Marison Pati",
+        "cabang_id": 7,
+        "created_at": null,
+        "updated_at": null
+    },
+    {
+        "id": 30,
+        "nama_proyek": "Marison Kecepak Batang",
+        "cabang_id": 8,
+        "created_at": null,
+        "updated_at": null
+    },
+    {
+        "id": 31,
+        "nama_proyek": "Marison Kandeman Batang",
+        "cabang_id": 8,
+        "created_at": null,
+        "updated_at": null
+    },
+    {
+        "id": 32,
+        "nama_proyek": "Marison Tegal",
+        "cabang_id": 8,
+        "created_at": null,
+        "updated_at": null
+    },
+    {
+        "id": 33,
+        "nama_proyek": "Marison Wonopringgo Pekalongan",
+        "cabang_id": 8,
+        "created_at": null,
+        "updated_at": null
+    },
+    {
+        "id": 34,
+        "nama_proyek": "Marison Sarengat Batang",
+        "cabang_id": 8,
+        "created_at": null,
+        "updated_at": null
+    },
+    {
+        "id": 35,
+        "nama_proyek": "Marison Majalaya",
+        "cabang_id": 11,
+        "created_at": null,
+        "updated_at": null
+    },
+    {
+        "id": 36,
+        "nama_proyek": "Marison Majalaya 2",
+        "cabang_id": 11,
+        "created_at": null,
+        "updated_at": null
+    },
+    {
+        "id": 37,
+        "nama_proyek": "Marison Sumedang",
+        "cabang_id": 11,
+        "created_at": null,
+        "updated_at": null
+    }
+]

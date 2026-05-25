@@ -1,0 +1,252 @@
+[
+    {
+        "nik_sales": "A 110",
+        "nama_sales": "Devanti",
+        "nik_koordinator": null,
+        "nama_koordinator": null,
+        "cabang": null,
+        "status": "Aktif",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "nik_sales": "A 135",
+        "nama_sales": "Lia",
+        "nik_koordinator": "A 141",
+        "nama_koordinator": "Arif",
+        "cabang": null,
+        "status": "Aktif",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "nik_sales": "A 141",
+        "nama_sales": "Arif",
+        "nik_koordinator": null,
+        "nama_koordinator": null,
+        "cabang": null,
+        "status": "Aktif",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "nik_sales": "C 017",
+        "nama_sales": "Cantika",
+        "nik_koordinator": "A 141",
+        "nama_koordinator": "Arif",
+        "cabang": null,
+        "status": "Aktif",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "nik_sales": "H 028",
+        "nama_sales": "Candra",
+        "nik_koordinator": "A 141",
+        "nama_koordinator": "Arif",
+        "cabang": null,
+        "status": "Aktif",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "nik_sales": "L 014",
+        "nama_sales": "Ratna ",
+        "nik_koordinator": "R 050",
+        "nama_koordinator": "Rizki",
+        "cabang": null,
+        "status": "Aktif",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "nik_sales": "M 053",
+        "nama_sales": "Aditya",
+        "nik_koordinator": null,
+        "nama_koordinator": null,
+        "cabang": null,
+        "status": "Aktif",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "nik_sales": "M 063",
+        "nama_sales": "Ilham",
+        "nik_koordinator": null,
+        "nama_koordinator": null,
+        "cabang": null,
+        "status": "Aktif",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "nik_sales": "OJT",
+        "nama_sales": "Arya",
+        "nik_koordinator": "A 141",
+        "nama_koordinator": "Arif",
+        "cabang": null,
+        "status": "OJT",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "nik_sales": "OJT-1",
+        "nama_sales": "Afrizal",
+        "nik_koordinator": "A 141",
+        "nama_koordinator": "Arif",
+        "cabang": null,
+        "status": "OJT",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "nik_sales": "OJT-2",
+        "nama_sales": "Usman",
+        "nik_koordinator": "R 050",
+        "nama_koordinator": "Rizki",
+        "cabang": null,
+        "status": "OJT",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "nik_sales": "OJT-3",
+        "nama_sales": "Dian",
+        "nik_koordinator": null,
+        "nama_koordinator": "Afrizal",
+        "cabang": null,
+        "status": "OJT",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "nik_sales": "OJT-4",
+        "nama_sales": "Khalis",
+        "nik_koordinator": null,
+        "nama_koordinator": "Afrizal",
+        "cabang": null,
+        "status": "OJT",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "nik_sales": "OUT",
+        "nama_sales": "Yuni",
+        "nik_koordinator": null,
+        "nama_koordinator": null,
+        "cabang": null,
+        "status": "OUT",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "nik_sales": "OUT-1",
+        "nama_sales": "Mia",
+        "nik_koordinator": null,
+        "nama_koordinator": null,
+        "cabang": null,
+        "status": "OUT",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "nik_sales": "OUT-2",
+        "nama_sales": "Irwan",
+        "nik_koordinator": null,
+        "nama_koordinator": null,
+        "cabang": null,
+        "status": "OUT",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "nik_sales": "OUT-3",
+        "nama_sales": "Adhi",
+        "nik_koordinator": null,
+        "nama_koordinator": null,
+        "cabang": null,
+        "status": "OUT",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "nik_sales": "OUT-4",
+        "nama_sales": "wahyu",
+        "nik_koordinator": null,
+        "nama_koordinator": null,
+        "cabang": null,
+        "status": "OUT",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "nik_sales": "R 050",
+        "nama_sales": "Rizki",
+        "nik_koordinator": null,
+        "nama_koordinator": null,
+        "cabang": null,
+        "status": "Aktif",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "nik_sales": "S 044",
+        "nama_sales": "Sevi",
+        "nik_koordinator": null,
+        "nama_koordinator": null,
+        "cabang": null,
+        "status": "Aktif",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "nik_sales": "S 057",
+        "nama_sales": "Sindi",
+        "nik_koordinator": "R 050",
+        "nama_koordinator": "Rizki",
+        "cabang": null,
+        "status": "Aktif",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "nik_sales": "U 003",
+        "nama_sales": "Uud",
+        "nik_koordinator": "A 141",
+        "nama_koordinator": "Arif",
+        "cabang": null,
+        "status": "Aktif",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "nik_sales": "U 004",
+        "nama_sales": "Usman",
+        "nik_koordinator": null,
+        "nama_koordinator": "Afrizal",
+        "cabang": null,
+        "status": "Aktif",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "nik_sales": "W 020",
+        "nama_sales": "Windi",
+        "nik_koordinator": null,
+        "nama_koordinator": null,
+        "cabang": null,
+        "status": "Aktif",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "nik_sales": "W 026",
+        "nama_sales": "Kris ",
+        "nik_koordinator": "R 050",
+        "nama_koordinator": "Rizki",
+        "cabang": null,
+        "status": "Aktif",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    }
+]

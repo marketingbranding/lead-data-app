@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "name": "super-admin",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:41",
+        "updated_at": "2026-05-21 07:53:41"
+    },
+    {
+        "id": 2,
+        "name": "admin",
+        "guard_name": "web",
+        "created_at": "2026-05-21 07:53:41",
+        "updated_at": "2026-05-21 07:53:41"
+    },
+    {
+        "id": 3,
+        "name": "admin-cabang",
+        "guard_name": "web",
+        "created_at": "2026-05-21 08:44:29",
+        "updated_at": "2026-05-21 08:44:29"
+    }
+]

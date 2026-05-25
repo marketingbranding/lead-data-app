@@ -1,0 +1,47 @@
+[
+    {
+        "id_promo": "251216-PU-02",
+        "nama_promo": "Promo UTJ 250 Ribu",
+        "tanggal_mulai": "2025-12-16",
+        "tanggal_selesai": "2025-12-31",
+        "keterangan": "UTJ 250 periode 16 - 31 des 2025",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "id_promo": "260101-PU-01",
+        "nama_promo": "Promo UTJ 250 Ribu",
+        "tanggal_mulai": "2026-01-01",
+        "tanggal_selesai": "2026-12-31",
+        "keterangan": "khusus sisa unit ready stock dan proses bangun 2025",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "id_promo": "260225-U5-03",
+        "nama_promo": "UTJ 500 Ribu Free THR",
+        "tanggal_mulai": "2026-02-25",
+        "tanggal_selesai": "2026-03-11",
+        "keterangan": "Stand Saudara Swalayan",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "id_promo": "Kosong-PF-04",
+        "nama_promo": "Promo Free 1x Angsuran",
+        "tanggal_mulai": null,
+        "tanggal_selesai": null,
+        "keterangan": "Kav D, E, I",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    },
+    {
+        "id_promo": "No Promo",
+        "nama_promo": "No Promo",
+        "tanggal_mulai": "2026-01-01",
+        "tanggal_selesai": "2026-12-31",
+        "keterangan": "Tidak ada promo",
+        "created_at": "2026-05-21 07:08:00",
+        "updated_at": "2026-05-21 07:08:00"
+    }
+]
