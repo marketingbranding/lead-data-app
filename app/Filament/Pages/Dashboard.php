@@ -7,6 +7,8 @@ use App\Models\Proyek;
 use Filament\Forms\Components\Select;
 use Filament\Pages\Dashboard as BaseDashboard;
 use Filament\Pages\Dashboard\Concerns\HasFiltersForm;
+use Filament\Schemas\Components\Component;
+use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Schema;
 
 class Dashboard extends BaseDashboard
@@ -19,6 +21,15 @@ class Dashboard extends BaseDashboard
     public function getColumns(): int | array
     {
         return 3;
+    }
+
+    public function getWidgetsContentComponent(): Component
+    {
+        $filterHash = md5(json_encode($this->filters ?? []));
+
+        return Grid::make($this->getColumns())
+            ->schema(fn (): array => $this->getWidgetsSchemaComponents($this->getWidgets()))
+            ->key("widgets-{$filterHash}");
     }
 
     public function filtersForm(Schema $schema): Schema
