@@ -14,9 +14,11 @@ class PipelineFunnelWidget extends ChartWidget
 
     protected ?string $heading = 'Konsumen per Proses Penjualan';
 
+    public ?array $pageFilters = null;
+
     protected function getData(): array
     {
-        $filters = session('dashboard_filters', []);
+        $filters = $this->pageFilters ?? [];
         $cabangId = $filters['cabang_id'] ?? null;
         $proyekId = $filters['proyek_id'] ?? null;
 

@@ -8,9 +8,11 @@ use Filament\Widgets\StatsOverviewWidget\Stat;
 
 class StatsOverviewWidget extends BaseWidget
 {
+    public ?array $pageFilters = null;
+
     protected function getStats(): array
     {
-        $filters = session('dashboard_filters', []);
+        $filters = $this->pageFilters ?? [];
         $cabangId = $filters['cabang_id'] ?? null;
         $proyekId = $filters['proyek_id'] ?? null;
 
