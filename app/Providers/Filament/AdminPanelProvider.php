@@ -32,7 +32,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->brandName('OASIS')
-            ->login()
+            ->login(\App\Filament\Auth\Pages\Login::class)
             ->authGuard('web')
             ->colors([
                 'primary' => Color::Amber,
@@ -77,6 +77,7 @@ class AdminPanelProvider extends PanelProvider
 .fi-ta-header-toolbar > div:last-child { display: inline-flex; align-items: center; gap: 0.5rem; }
 .fi-ta-filters-dropdown, .fi-ta-filters-modal, .fi-ta-filters-trigger-action-ctn { order: 2 !important; }
 .fi-ta-col-manager-modal, .fi-ta-col-manager-dropdown { order: 1 !important; }
+.fi-simple-header { text-align: center; }
 </style>',
         );
 
