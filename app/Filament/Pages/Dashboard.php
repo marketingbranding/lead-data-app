@@ -39,6 +39,7 @@ class Dashboard extends BaseDashboard
                 Select::make('cabang_id')
                     ->label('Cabang')
                     ->placeholder('Semua Cabang')
+                    ->searchable()
                     ->options(Cabang::pluck('nama', 'id'))
                     ->hidden(fn () => auth()->user()?->hasRole('admin-cabang'))
                     ->live()
@@ -46,6 +47,7 @@ class Dashboard extends BaseDashboard
                 Select::make('proyek_id')
                     ->label('Proyek')
                     ->placeholder('Semua Proyek')
+                    ->searchable()
                     ->options(fn ($get) => Proyek::query()
                         ->when(
                             $get('cabang_id'),
