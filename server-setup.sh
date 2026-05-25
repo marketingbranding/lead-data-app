@@ -31,7 +31,7 @@ DB_NAME="lead_data"
 DB_USER="lead_data_user"
 DB_PASS="$(openssl rand -base64 16)"
 APP_DOMAIN="10.10.10.106"
-GIT_REPO="https://github.com/groupmarketingmbn-hash/lead-data-app.git"
+GIT_REPO="https://github.com/marketingbranding/lead-data-app.git"
 
 echo ""
 echo -e "${YELLOW}Konfigurasi:${NC}"
