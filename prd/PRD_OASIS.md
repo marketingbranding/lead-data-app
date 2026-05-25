@@ -1,9 +1,9 @@
 # Product Requirements Document (PRD)
-## Aplikasi Admin Perusahaan Properti KPR Rumah Subsidi
+## OASIS — Online & Offline Sales Integration System
 
 | Dokumen | |
 |---------|-|
-| **Nama Produk** | LeadData |
+| **Nama Produk** | OASIS : Online & Offline Sales Integration System |
 | **Versi** | 1.0 |
 | **Tanggal** | 22 Mei 2026 |
 | **Status** | Final |

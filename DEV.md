@@ -1,4 +1,4 @@
-# Development Plan — LeadData
+# Development Plan — OASIS
 
 ## Tech Stack
 - **Backend:** Laravel 13.7.0 (PHP 8.3.31)
