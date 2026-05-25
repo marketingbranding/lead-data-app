@@ -16,4 +16,9 @@ class Login extends BaseLogin
     {
         return 'Online & Offline Sales Integration System';
     }
+
+    public function hasLogo(): bool
+    {
+        return false;
+    }
 }
