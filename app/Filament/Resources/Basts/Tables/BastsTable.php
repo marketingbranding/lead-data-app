@@ -1,0 +1,72 @@
+<?php
+
+namespace App\Filament\Resources\Basts\Tables;
+
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Table;
+use Filament\Forms\Components\Select;
+use App\Models\Cabang;
+use App\Models\Proyek;
+
+class BastsTable
+{
+    public static function configure(Table $table): Table
+    {
+        return $table
+            ->columns([
+                TextColumn::make('id_kavling')->sortable()->searchable(),
+                TextColumn::make('jenis_pipeline')
+                    ->badge()
+                    ->color(fn (string $state): string => $state === 'CASH' ? 'warning' : 'primary')
+                    ->label('Jenis'),
+                TextColumn::make('tanggal_bast')->date()->sortable(),
+                TextColumn::make('lead_time_hari')->sortable(),
+                TextColumn::make('status')
+                    ->badge()
+                    ->color(fn (string $state): string => $state === 'terlambat' ? 'danger' : 'success')
+                    ->sortable(),
+                TextColumn::make('status_data')
+                    ->label('Status Data')
+                    ->badge()
+                    ->color(fn (string $state): string => $state === 'Data Lengkap' ? 'success' : 'danger')
+                    ->sortable(),
+                TextColumn::make('created_at')->dateTime()->sortable()->toggleable(isToggledHiddenByDefault: true),
+            ])
+            ->filters([
+                Filter::make('cabang_proyek')
+                    ->form([
+                        Select::make('cabang_id')
+                            ->label('Cabang')
+                            ->placeholder('Semua Cabang')
+                            ->options(Cabang::pluck('nama', 'id'))
+                            ->hidden(fn () => auth()->user()?->hasRole('admin-cabang'))
+                            ->live(),
+                        Select::make('proyek_id')
+                            ->label('Proyek')
+                            ->placeholder('Semua Proyek')
+                            ->options(fn ($get) => Proyek::when(
+                                $get('cabang_id') ?? (auth()->user()?->hasRole('admin-cabang') ? auth()->user()->cabang_id : null),
+                                fn ($q, $v) => $q->where('cabang_id', $v)
+                            )->pluck('nama_proyek', 'id')),
+                    ])
+                    ->query(fn ($query, $data) => $query->whereHas('kavling', fn ($q) =>
+                        $q
+                            ->when(auth()->user()?->hasRole('admin-cabang'), fn ($q) => $q->where('cabang_id', auth()->user()->cabang_id))
+                            ->when($data['cabang_id'] ?? null, fn ($q, $v) => $q->where('cabang_id', $v))
+                            ->when($data['proyek_id'] ?? null, fn ($q, $v) => $q->where('proyek_id', $v))
+                    )),
+            ])
+            ->recordActions([
+                EditAction::make(),
+            ])
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
+                ]),
+            ]);
+    }
+}

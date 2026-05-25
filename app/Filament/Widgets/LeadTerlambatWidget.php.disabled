@@ -1,0 +1,35 @@
+<?php
+
+namespace App\Filament\Widgets;
+
+use Filament\Tables;
+use Filament\Tables\Table;
+use Filament\Widgets\TableWidget as BaseWidget;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
+
+class LeadTerlambatWidget extends BaseWidget
+{
+    protected ?string $heading = 'Pipeline Terlambat';
+
+    public function table(Table $table): Table
+    {
+        return $table
+            ->query(
+                \App\Models\Kavling::query()->whereRaw('1 = 0')
+            )
+            ->columns([
+                Tables\Columns\TextColumn::make('id_kavling')
+                    ->label('ID Kavling'),
+                Tables\Columns\TextColumn::make('tahap')
+                    ->label('Tahap')
+                    ->badge(),
+                Tables\Columns\TextColumn::make('lead_time_hari')
+                    ->label('Lead Time (hari)')
+                    ->numeric(),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Terakhir Update')
+                    ->dateTime('d-m-Y H:i'),
+            ]);
+    }
+}

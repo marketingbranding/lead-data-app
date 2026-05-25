@@ -1,0 +1,7 @@
+tabel,proses,target waktu hari kerja
+psjb,bi_checking - psjb,1
+pemberkasan,psjb -pemberkasan,3
+proses bank,pemberkasan - proses bank,10
+ppjb_dev,Proses bank - ppjb_dev,10
+akad,ppjb_dev - akad,3
+bast,rumah ready 100% - bast,1
