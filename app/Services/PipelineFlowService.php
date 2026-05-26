@@ -152,6 +152,6 @@ class PipelineFlowService
             default => null,
         };
 
-        return $resourceClass?->getUrl('edit', ['record' => $next]);
+        return $resourceClass ? $resourceClass::getUrl('edit', ['record' => $next]) : null;
     }
 }
