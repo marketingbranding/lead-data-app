@@ -7,6 +7,7 @@ return new class extends Migration
 {
     public function up(): void
     {
+        DB::table('pemberkasan')->where('tipe_pemberkasan', 'CASH')->update(['tipe_pemberkasan' => null]);
         DB::statement("ALTER TABLE pemberkasan MODIFY COLUMN tipe_pemberkasan ENUM('registrasi', 'banding', 'pip', 'revisi') NULL");
     }
 
