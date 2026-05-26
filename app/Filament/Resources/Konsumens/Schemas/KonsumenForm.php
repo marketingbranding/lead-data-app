@@ -18,11 +18,20 @@ class KonsumenForm
             ->components([
                 Select::make('id_kavling')
                     ->label('Kavling')
-                    ->relationship('kavling', 'id_kavling')
                     ->searchable()
                     ->preload()
                     ->optionsLimit(9999)
-                    ->native(false),
+                    ->native(false)
+                    ->options(function ($record = null) {
+                        return \App\Models\Kavling::query()
+                            ->where(function ($q) use ($record) {
+                                $q->whereDoesntHave('konsumens');
+                                if ($record?->id_kavling) {
+                                    $q->orWhere('id_kavling', $record->id_kavling);
+                                }
+                            })
+                            ->pluck('id_kavling', 'id_kavling');
+                    }),
                 TextInput::make('no_ktp')
                     ->label('No. KTP')
                     ->required()
