@@ -5,6 +5,9 @@ namespace App\Providers;
 use App\Models\Akad;
 use App\Models\Bast;
 use App\Models\BiChecking;
+use App\Models\Campaign;
+use App\Models\DailyLeadOffline;
+use App\Models\DailyLeadOnline;
 use App\Models\Expense;
 use App\Models\Kavling;
 use App\Models\Konsumen;
@@ -72,6 +75,9 @@ class AppServiceProvider extends ServiceProvider
             Bast::class,
             Expense::class,
             PipelineLog::class,
+            Campaign::class,
+            DailyLeadOffline::class,
+            DailyLeadOnline::class,
         ];
 
         foreach ($cabangScopedModels as $model) {

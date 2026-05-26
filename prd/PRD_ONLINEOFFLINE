@@ -1,0 +1,285 @@
+PRODUCT REQUIREMENTS DOCUMENT (PRD)
+
+Nama Fitur: Modul Terintegrasi Tracking Lead (Online & Offline)
+Status: Perencanaan / Siap Dikembangkan
+Tujuan Integrasi: Memindahkan pencatatan manual dari Spreadsheet ke Web App eksisting untuk otomatisasi kalkulasi metrik (CPL, CPA), standardisasi funneling lead, dan pengamanan data berbasis lokasi cabang.
+
+1. Latar Belakang & Objektif
+
+Saat ini, pencatatan performa kampanye marketing (anggaran, trafik, lead, hingga closing Uang Tanda Jadi/UTJ) masih dilakukan terpisah melalui Spreadsheet (Sheet Bulanan, Daily Lead, dan Tracking Online).
+
+Objektif pengembangan fitur ini:
+
+Menyediakan alur input harian yang memisahkan pengisian dan laporan untuk Kampanye Offline (tanpa klik tautan) dan Kampanye Online (dengan klik tautan dan tahap respons).
+
+Mengotomatiskan perhitungan Cost per Lead (CPL), Cost per Acquisition (CPA), dan metrik lainnya sesuai dengan jenis kampanye.
+
+Menerapkan Role-Based Access Control (RBAC) agar Admin Cabang hanya bisa mengakses dan menginput data milik cabangnya sendiri.
+
+2. Pengguna & Hak Akses (Role-Based Access)
+
+Fitur ini akan menggunakan sistem autentikasi yang sudah ada di Web App, dengan pembagian peran:
+
+Admin Cabang:
+
+Hanya dapat melihat, menambah, dan mengedit data Kampanye serta Input Harian untuk cabangnya sendiri.
+
+Melihat Dashboard ringkasan khusus cabangnya (Terpisah Online & Offline).
+
+Manajemen / Pusat (Super Admin):
+
+Dapat melihat data dari seluruh cabang.
+
+Melihat Dashboard konsolidasi dengan fitur filter tambahan (berdasarkan Cabang/Proyek).
+
+3. Spesifikasi Fitur Utama (Functional Requirements)
+
+Modul A: Master Kampanye (Campaign Setup)
+
+Modul ini digunakan ketika cabang akan memulai aktivitas promosi baru, baik online maupun offline.
+
+Logika Sistem:
+
+Sistem otomatis generate ID Kampanye.
+
+Sistem membaca ID User yang login dan otomatis mengunci field Cabang.
+
+Dropdown Nama Proyek hanya mengambil data dari Master Proyek yang terhubung dengan cabang tersebut.
+
+Pilihan Kategori Promosi (Online/Offline) akan menentukan form input harian mana yang akan digunakan nantinya.
+
+Struktur Database / Form Input:
+
+Nama Field
+
+Tipe Data
+
+Keterangan / Validasi
+
+ID Kampanye
+
+Auto-String
+
+Format: CMP-[YYYYMM]-[AutoNumber]
+
+Cabang
+
+Auto-Fill
+
+Terisi otomatis berdasarkan user login.
+
+Nama Proyek
+
+Dropdown
+
+Relasi dari Master Proyek (berdasarkan cabang).
+
+Kategori Promosi
+
+Dropdown
+
+Pilihan: Online, Offline.
+
+Sumber Promosi
+
+Dropdown/String
+
+Contoh: FB Ads (Online), Brosur (Offline).
+
+Tanggal Mulai
+
+Date
+
+Wajib diisi.
+
+Tanggal Selesai
+
+Date
+
+Wajib diisi ($\ge$ Tanggal Mulai).
+
+Budget Promosi
+
+Currency
+
+Input angka (Rupiah).
+
+Status
+
+Dropdown
+
+Draft, Berlangsung, Jeda, Selesai.
+
+Catatan
+
+Text Area
+
+Opsional.
+
+Modul B: Tracking Harian (Daily Funneling) - DIPISAH ONLINE & OFFLINE
+
+Form data entry yang diisi setiap hari oleh Admin Cabang. Terdapat dua form berbeda yang muncul tergantung pada status Kategori Promosi di Master Kampanye.
+
+Logika Sistem Umum:
+
+Dropdown ID Kampanye hanya menampilkan kampanye status Berlangsung di cabang user.
+
+Jika user memilih ID Kampanye dengan kategori Offline, maka Form B1 yang muncul.
+
+Jika user memilih ID Kampanye dengan kategori Online, maka Form B2 yang muncul.
+
+Form B1: Input Harian OFFLINE (Berdasarkan "Sheet Daily Lead" lama)
+
+Fokus pada perolehan lead langsung tanpa metrik klik atau respons digital.
+
+Nama Field
+
+Tipe Data
+
+Keterangan / Validasi
+
+ID Kampanye (Offline)
+
+Dropdown
+
+Memilih kampanye offline yang sedang berjalan.
+
+Tanggal Laporan
+
+Date
+
+Default: Tanggal hari ini (H).
+
+Lead Didapat (Masuk)
+
+Number
+
+Jumlah kontak prospek yang didapat hari itu.
+
+Kunjungan Lokasi
+
+Number
+
+(Opsional) Jumlah lead yang divisitkan.
+
+Closing (UTJ)
+
+Number
+
+(Opsional) Transaksi sukses hari itu.
+
+Catatan: Kolom 'Hari Ke' dan 'Cumulative Leads' dihilangkan dari input karena akan dihitung dan ditampilkan di Dashboard/Laporan.
+
+Form B2: Input Harian ONLINE (Berdasarkan "Tracking Online" lama)
+
+Fokus pada funneling digital yang lebih panjang, dari klik hingga UTJ.
+
+Nama Field
+
+Tipe Data
+
+Keterangan / Validasi
+
+ID Kampanye (Online)
+
+Dropdown
+
+Memilih kampanye online yang sedang berjalan.
+
+Tanggal Laporan
+
+Date
+
+Default: Tanggal hari ini (H).
+
+Klik Tautan
+
+Number
+
+Trafik masuk dari iklan.
+
+Lead Masuk
+
+Number
+
+Kontak WA/Form yang masuk.
+
+Respon
+
+Number
+
+Lead yang merespons/membalas.
+
+Tahap Diskusi
+
+Number
+
+Lead yang prospek dan berdiskusi.
+
+Cek Lokasi
+
+Number
+
+Lead yang melakukan kunjungan/visit.
+
+Closing (UTJ)
+
+Number
+
+Transaksi Uang Tanda Jadi sukses.
+
+Modul C: Dashboard & Laporan (DIPISAH)
+
+Tampilan tabel dan grafik agregat, dipisah menjadi dua tab/halaman berbeda.
+
+Logika Sistem Global:
+
+Filter: Rentang Waktu, Cabang (Khusus Pusat), Nama Proyek.
+
+Dashboard C1: Laporan OFFLINE
+
+Nama Proyek
+
+Sumber Promosi (Brosur, Umbul-umbul, dll)
+
+Total Budget
+
+Total Lead Didapat (Sum dari Form B1)
+
+Total Kunjungan (Sum dari Form B1)
+
+Total UTJ (Sum dari Form B1)
+
+Cost per Lead (CPL) (Total Budget / Total Lead)
+
+Budget / UTJ (CPA) (Total Budget / Total UTJ)
+
+Dashboard C2: Laporan ONLINE (Berdasarkan "Dashboard Mingguan" lama)
+
+Nama Proyek
+
+Total Budget
+
+Klik Tautan (Sum dari Form B2)
+
+Lead Masuk (Sum dari Form B2)
+
+Respon (Sum dari Form B2)
+
+Tahap Diskusi (Sum dari Form B2)
+
+Cek Lokasi (Sum dari Form B2)
+
+Closing (UTJ) (Sum dari Form B2)
+
+Budget / UTJ (CPA) (Total Budget / Total UTJ)
+
+Keterangan (Diambil dari Catatan Kampanye atau input manual dashboard jika diperlukan)
+
+4. Requirement Non-Fungsional & Integrasi Eksisting
+
+Integrasi Database: Wajib terhubung dengan tabel Users dan Master_Proyek.
+
+Penanganan Error: Tambahkan logika untuk menghindari "Divide by Zero" pada perhitungan CPL dan CPA (misal: tampilkan Rp0 jika pembagi adalah 0).
+
+Validasi: Form harian tidak mengizinkan huruf pada field angka.

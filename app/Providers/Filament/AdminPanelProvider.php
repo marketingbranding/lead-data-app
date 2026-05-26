@@ -39,7 +39,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->navigationGroups([
                 'Master Data',
-                'Proses Penjualan',
+                'Penjualan & Marketing',
                 'Keuangan',
                 'Laporan',
                 'Settings',

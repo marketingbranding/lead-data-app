@@ -23,7 +23,9 @@ class BiCheckingResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'id_kavling';
 
-    protected static UnitEnum|string|null $navigationGroup = 'Proses Penjualan';
+    protected static UnitEnum|string|null $navigationGroup = 'Penjualan & Marketing';
+
+    protected static ?string $navigationParentItem = 'Proses Penjualan';
 
     protected static ?int $navigationSort = 1;
 

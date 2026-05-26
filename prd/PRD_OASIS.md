@@ -98,7 +98,9 @@ Pipeline memiliki dua jalur berdasarkan metode pembayaran konsumen yang ditentuk
 - Setiap perpindahan tahap dilakukan via tombol "Lanjut ke [Tahap Berikutnya]" di halaman edit.
 - Sistem otomatis membuat record tahap berikutnya dengan data relevan.
 - **Lead Time:** Sistem otomatis menghitung selisih hari kerja antara dua transaksi berurutan via `LeadTimeService`.
+- **Status (ontime/terlambat):** Dikomputasi secara dinamis via `getStatusAttribute()` accessor di setiap model pipeline, dengan lookup target dari tabel `lead_times`. Jika `lead_time_hari` sudah tersimpan, dipakai langsung; jika belum, dihitung dari `created_at` ke `now()`.
 - **Guard Proses Bank:** Jika `jenis_respon` adalah `Reject` atau `Revisi`, pipeline berhenti — tombol "Lanjut ke PPJB Developer" tidak muncul dan `PipelineFlowService` return null untuk next stage.
+- **Guard Pemberkasan:** Jika ada `revisiPemberkasans` dengan status `pending`, pipeline berhenti — tombol "Lanjut" tidak muncul, label "Pemberkasan (Berhenti - Revisi)".
 - `status_data` dikomputasi secara dinamis via Eloquent accessor (tidak hanya mengandalkan DB column) — memeriksa mandatory fields setiap model.
 
 #### Tahap 1: BI Checking / SLIK
@@ -156,7 +158,7 @@ Pengumpulan dokumen KPR ke bank.
 | kc_unit | VARCHAR(100) | Kantor cabang bank |
 | request_plafond | DECIMAL(15,2) | Plafon KPR yang diajukan (format: Rp1.000.000) |
 | request_tenor | VARCHAR(20) | Tenor yang diajukan |
-| tipe_pemberkasan | ENUM('registrasi','CASH') | Tipe pemberkasan |
+| tipe_pemberkasan | ENUM('registrasi','banding','pip','revisi','lengkap') | Tipe pemberkasan (revisi → berhenti, lengkap → selesai revisi) |
 | lead_time_hari | INT | Lead time aktual (hari) |
 | status | ENUM('ontime','terlambat') | Status lead time |
 | keterangan | TEXT | Catatan |
@@ -177,8 +179,10 @@ Pengajuan KPR ke bank dan memperoleh SP3K.
 | approved_tenor | VARCHAR(20) | Tenor disetujui |
 | lead_time_hari | INT | Lead time aktual (hari) |
 | status | ENUM('ontime','terlambat') | Status lead time |
-| kategori_revisi | VARCHAR(100) | Kategori revisi jika ada |
-| detail_revisi | TEXT | Detail revisi |
+| — Revisi via tabel `revisi_proses_banks` (Repeater) — | | |
+| &nbsp;&nbsp; kategori | ENUM('Rekening Koran','Slip Gaji') | Kategori revisi (via hasMany Repeater) |
+| &nbsp;&nbsp; detail | TEXT | Detail revisi |
+| &nbsp;&nbsp; status | ENUM('pending','selesai') | Status penyelesaian revisi |
 | keterangan | TEXT | Catatan |
 | status_data | ENUM('Data Lengkap','Data Belum Lengkap') | Otomatis via accessor: cek `no_sp3k`, `jenis_respon`, `approved_plafond` |
 
@@ -187,6 +191,9 @@ Pengajuan KPR ke bank dan memperoleh SP3K.
 **Guard:** Jika `jenis_respon = Reject` atau `Revisi`, pipeline berhenti:
 - `PipelineFlowService::getNextStageClass()` return `null`
 - Tombol "Lanjut ke PPJB Dev" tidak muncul di UI
+- Jika `Revisi`: muncul form Repeater `revisiProsesBanks` untuk input kategori + detail revisi
+- Setelah semua revisi `selesai` → tombol **Resubmit** muncul → ubah `jenis_respon` jadi `Approved`
+- Jika `Reject`: **otomatis** via `RejectKavlingObserver` → `status_konsumen = 'batal'`, soft-delete semua pipeline records, tutup PipelineLog
 
 #### Tahap 5: PPJB Developer
 Perjanjian Jual Beli antara developer & konsumen (notariil).
@@ -336,6 +343,7 @@ Serah terima kunci & unit rumah.
 | no_hp_kondar | VARCHAR(20) | No. HP kontak darurat |
 | status_cash | ENUM('YA','TIDAK') | Pembayaran cash atau KPR |
 | status_data | ENUM('Data Lengkap','Data Belum Lengkap') | Otomatis via accessor: cek `nama_konsumen`, `no_ktp`, `no_hp`, `pekerjaan`, `tanggal_lahir`, `alamat`, `kelurahan`, `kecamatan`, `kabupaten_kota` |
+| status_konsumen | ENUM('aktif','batal') | Otomatis jadi 'batal' saat ProsesBank reject |
 | keterangan | TEXT | Catatan tambahan |
 
 **Display:** `id_konsumen` dapat di-hide di table view.
@@ -417,7 +425,31 @@ Serah terima kunci & unit rumah.
 | model_has_permissions | Pivot user → permission (optional) |
 | role_has_permissions | Pivot role → permission |
 
-### 5.12 View di Filament
+### 5.12 Tabel Revisi Proses Bank
+
+| Field | Tipe | Keterangan |
+|-------|------|-----------|
+| id | BIGINT (PK, Auto Increment) | ID unik |
+| id_proses_bank | BIGINT (FK → proses_bank, CASCADE ON DELETE) | ProsesBank terkait |
+| kategori | ENUM('Rekening Koran','Slip Gaji') | Kategori revisi |
+| detail | TEXT | Detail revisi |
+| status | ENUM('pending','selesai') | Status (default: pending) |
+
+**Workflow:** Diisi via Repeater di form ProsesBank. Jika semua `selesai` → tombol **Resubmit** muncul → `jenis_respon` jadi `Approved`.
+
+### 5.13 Tabel Revisi Pemberkasan
+
+| Field | Tipe | Keterangan |
+|-------|------|-----------|
+| id | BIGINT (PK, Auto Increment) | ID unik |
+| id_pemberkasan | BIGINT (FK → pemberkasan, CASCADE ON DELETE) | Pemberkasan terkait |
+| kategori | VARCHAR(100) | Kategori revisi (diisi nanti) |
+| detail | TEXT | Detail revisi |
+| status | ENUM('pending','selesai') | Status (default: pending) |
+
+**Workflow:** Diisi via Repeater di form Pemberkasan. Jika semua `selesai` → tombol **Resubmit** muncul → `tipe_pemberkasan` jadi `lengkap`.
+
+### 5.14 View di Filament
 
 | Page | Route | Fitur |
 |------|-------|-------|
@@ -461,6 +493,9 @@ kavlings ──1:N── konsumens (via id_kavling)
 users ──N:1── cabangs (via cabang_id)
 users ──M:N── roles (via model_has_roles)
 roles ──M:N── permissions (via role_has_permissions)
+
+proses_bank ──1:N── revisi_proses_banks (via id_proses_bank)
+pemberkasan ──1:N── revisi_pemberkasans (via id_pemberkasan)
 ```
 
 ---
@@ -490,11 +525,21 @@ Konsumen → (cash? YA → Psjb, TIDAK → BiChecking)
 BiChecking → Psjb
 Psjb → Pemberkasan
 Pemberkasan → (cash path? YA → PpjbDev, TIDAK → ProsesBank)
+           → (ada revisi pending? → null / berhenti)
 ProsesBank → (jenis_respon Reject/Revisi? → null, else → PpjbDev)
+           → (Revisi + semua selesai? → Resubmit → Approved → PpjbDev)
+           → (Reject? → RejectKavlingObserver: soft-delete + bebas kavling)
 PpjbDev → Akad
 Akad → Bast
 Bast → null (end)
 ```
+
+**Revisi Workflow:**
+1. ProsesBank: `jenis_respon = Revisi` → input Repeater `revisiProsesBanks` → semua `selesai` → **Resubmit** → `jenis_respon = Approved`
+2. Pemberkasan: `tipe_pemberkasan = revisi` → input Repeater `revisiPemberkasans` → semua `selesai` → **Resubmit** → `tipe_pemberkasan = lengkap`
+
+**Reject Workflow (otomatis via RejectKavlingObserver):**
+- `jenis_respon = Reject` → `status_konsumen = 'batal'` → soft-delete semua pipeline records (BiChecking, Psjb, Pemberkasan, ProsesBank, dll) → PipelineLog ditutup → Kavling otomatis jadi **Tersedia**
 
 ### 7.2 LeadTimeService
 
@@ -543,15 +588,18 @@ Setiap pipeline model memiliki `getStatusDataAttribute()` accessor yang mengkomp
 - [x] Dual path: Cash vs KPR
 - [x] Currency mask (Alpine.js `$money`) untuk semua field rupiah
 - [x] Guard Proses Bank: stop pipeline jika Reject/Revisi
+- [x] Guard Pemberkasan: stop pipeline jika ada revisi pending
 - [x] Status data computed (accessor) — selalu akurat
 - [x] Status data auto-set via observer saat save
-- [x] Lead time calculation & status (ontime/terlambat)
+- [x] Lead time calculation & status (ontime/terlambat) — computed accessor + DB
 - [x] Pipeline flow service
 - [x] Role & permission (Spatie)
 - [x] Multi-cabang scoping
 - [x] Export data via ExportService (DB langsung, tidak terpengaruh formatting)
 - [x] Seeder data dari CSV (8 file: kavling, konsumen, 7 pipeline)
 - [x] Auto-mapping id_kavling di seeder (handle format dengan/senza Marison)
+- [x] Revisi sistem (ProsesBank + Pemberkasan): tabel, Repeater, Resubmit workflow
+- [x] Reject otomatis bebas kavling: status_konsumen, SoftDeletes, RejectKavlingObserver
 
 ### Fase 2
 - [ ] Notifikasi otomatis
@@ -560,6 +608,8 @@ Setiap pipeline model memiliki `getStatusDataAttribute()` accessor yang mengkomp
 - [ ] Integrasi API Meta Ads
 - [ ] Modul target & realisasi sales
 - [ ] Komisi sales
+- [ ] Modul Kampanye / Event Lead (tracking lead online & offline)
+- [ ] Modul Daily Lead Tracking
 
 ### Fase 3
 - [ ] Integrasi WhatsApp
@@ -597,15 +647,22 @@ Setiap pipeline model memiliki `getStatusDataAttribute()` accessor yang mengkomp
           ↓ Lolos
        [PSJB]
           ↓
-    [Pemberkasan]
+    [Pemberkasan] ← Revisi Pending → Berhenti
+          │              ↓ semua selesai
+          │        [Resubmit] → lanjut
           ↓
-    [Proses Bank] ← Reject/Revisi → Berhenti
-          ↓ Approved
-    [PPJB Developer]
-          ↓
-        [Akad]
-          ↓
-       [BAST] → Selesai
+    [Proses Bank]
+          │
+          ├── Approved → [PPJB Developer] → [Akad] → [BAST] → Selesai
+          │
+          ├── Revisi → input Repeater revisi
+          │              ↓ semua selesai
+          │        [Resubmit] → Approved → lanjut
+          │
+          └── Reject → otomatis bebas kavling
+                        ├ status_konsumen = batal
+                        ├ soft-delete pipeline records
+                        └ Kavling → Tersedia
 ```
 
 ---
