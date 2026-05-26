@@ -7,6 +7,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Placeholder;
+use Carbon\Carbon;
 use Filament\Schemas\Schema;
 use Illuminate\Support\HtmlString;
 
@@ -53,8 +54,11 @@ class KonsumenForm
                 TextInput::make('detail_pekerjaan')
                     ->label('Detail Pekerjaan')
                     ->maxLength(200),
-                TextInput::make('umur')
-                    ->numeric(),
+                Placeholder::make('umur')
+                    ->label('Umur')
+                    ->content(fn ($get) => $get('tanggal_lahir')
+                        ? Carbon::parse($get('tanggal_lahir'))->age . ' tahun'
+                        : '-'),
                 Textarea::make('alamat')
                     ->required()
                     ->rows(3)

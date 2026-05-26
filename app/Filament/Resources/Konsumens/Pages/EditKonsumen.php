@@ -19,10 +19,10 @@ class EditKonsumen extends EditRecord
         return [
             DeleteAction::make(),
             Action::make('lanjutTahap')
-                ->label($service->getNextStageLabel($this->record))
+                ->label(fn () => $service->getNextStageLabel($this->record))
                 ->icon('heroicon-o-arrow-right-circle')
                 ->color('success')
-                ->visible(fn (): bool => $this->record->status_data === 'Data Lengkap')
+                ->visible(fn (): bool => $this->record->status_data === 'Data Lengkap' && $service->getNextStageLabel($this->record) !== null)
                 ->action(fn () => redirect($service->getNextStageEditUrl($this->record))),
         ];
     }

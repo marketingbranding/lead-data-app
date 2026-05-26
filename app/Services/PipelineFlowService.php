@@ -16,10 +16,53 @@ use Illuminate\Database\Eloquent\Model;
 
 class PipelineFlowService
 {
+    public function getNextStageForKonsumen(Konsumen $record): ?string
+    {
+        $kavling = $record->kavling;
+        if (!$kavling) {
+            return $record->status_cash === 'YA' ? PpjbDev::class : BiChecking::class;
+        }
+
+        $chain = $record->status_cash === 'YA'
+            ? [PpjbDev::class, Akad::class, Bast::class]
+            : [BiChecking::class, Psjb::class, Pemberkasan::class, ProsesBank::class, PpjbDev::class, Akad::class, Bast::class];
+
+        $relationMap = [
+            BiChecking::class => 'biChecking',
+            Psjb::class => 'psjb',
+            Pemberkasan::class => 'pemberkasan',
+            ProsesBank::class => 'prosesBank',
+            PpjbDev::class => 'ppjbDev',
+            Akad::class => 'akad',
+            Bast::class => 'bast',
+        ];
+
+        foreach ($chain as $stageClass) {
+            $relation = $relationMap[$stageClass];
+            $existing = $kavling->$relation;
+
+            if (!$existing) {
+                return $stageClass;
+            }
+
+            if ($stageClass === ProsesBank::class) {
+                if (in_array($existing->jenis_respon, ['Reject', 'Revisi'])) {
+                    return null;
+                }
+            }
+
+            if ($existing->status_data !== 'Data Lengkap') {
+                return $stageClass;
+            }
+        }
+
+        return null;
+    }
+
     public function getNextStageClass(Model $record): ?string
     {
         return match (get_class($record)) {
-            Konsumen::class => $record->status_cash === 'YA' ? Psjb::class : BiChecking::class,
+            Konsumen::class => $this->getNextStageForKonsumen($record),
             BiChecking::class => Psjb::class,
             Psjb::class => Pemberkasan::class,
             Pemberkasan::class => $record->kavling?->isCashPath() ? PpjbDev::class : ProsesBank::class,
@@ -33,7 +76,16 @@ class PipelineFlowService
     public function getNextStageLabel(Model $record): ?string
     {
         return match (get_class($record)) {
-            Konsumen::class => $record->status_cash === 'YA' ? 'Lanjut ke PSJB' : 'Lanjut ke Bi Checking',
+            Konsumen::class => match ($this->getNextStageClass($record)) {
+                BiChecking::class => 'Lanjut ke Bi Checking',
+                Psjb::class => 'Lanjut ke PSJB',
+                Pemberkasan::class => 'Lanjut ke Pemberkasan',
+                ProsesBank::class => 'Lanjut ke Proses Bank',
+                PpjbDev::class => 'Lanjut ke PPJB Developer',
+                Akad::class => 'Lanjut ke Akad',
+                Bast::class => 'Lanjut ke BAST',
+                default => null,
+            },
             BiChecking::class => 'Lanjut ke PSJB',
             Psjb::class => 'Lanjut ke Pemberkasan',
             Pemberkasan::class => $record->kavling?->isCashPath() ? 'Lanjut ke PPJB Dev' : 'Lanjut ke Proses Bank',
@@ -49,9 +101,42 @@ class PipelineFlowService
         $nextClass = $this->getNextStageClass($record);
 
         return match (get_class($record)) {
-            Konsumen::class => $nextClass === BiChecking::class
-                ? ['id_kavling' => $record->id_kavling, 'no_ktp' => $record->no_ktp, 'id_kons' => $record->id_konsumen]
-                : ['id_kavling' => $record->id_kavling, 'id_kons' => $record->id_konsumen],
+            Konsumen::class => match ($nextClass) {
+                BiChecking::class => [
+                    'id_kavling' => $record->id_kavling,
+                    'no_ktp' => $record->no_ktp,
+                    'id_kons' => $record->id_konsumen,
+                ],
+                Psjb::class => [
+                    'id_kavling' => $record->id_kavling,
+                    'id_kons' => $record->id_konsumen,
+                    'id_psjb' => 'PSJB-' . substr($record->id_kavling, 0, 15) . '-' . now()->format('ymdHis'),
+                ],
+                Pemberkasan::class => [
+                    'id_kavling' => $record->id_kavling,
+                    'id_psjb' => $record->kavling?->psjb?->id_psjb,
+                    'id_berkas' => 'BRK-' . substr($record->id_kavling, 0, 15) . '-' . now()->format('ymdHis'),
+                ],
+                ProsesBank::class => [
+                    'id_kavling' => $record->id_kavling,
+                    'id_berkas' => $record->kavling?->pemberkasan?->id_berkas,
+                ],
+                PpjbDev::class => [
+                    'id_kavling' => $record->id_kavling,
+                    'no_sp3k' => $record->kavling?->prosesBank?->no_sp3k,
+                ],
+                Akad::class => [
+                    'id_kavling' => $record->id_kavling,
+                    'id_ppjb_dev' => $record->kavling?->ppjbDev?->id_ppjb_dev,
+                    'no_ppjb_akad' => 'AKAD-' . substr($record->id_kavling, 0, 15) . '-' . now()->format('ymdHis'),
+                ],
+                Bast::class => [
+                    'id_kavling' => $record->id_kavling,
+                    'no_ppjb_akad' => $record->kavling?->akad?->no_ppjb_akad,
+                    'no_bast' => 'BAST-' . substr($record->id_kavling, 0, 15) . '-' . now()->format('ymdHis'),
+                ],
+                default => ['id_kavling' => $record->id_kavling],
+            },
             BiChecking::class => ['id_kavling' => $record->id_kavling, 'id_kons' => $record->id_kons, 'id_psjb' => 'PSJB-' . substr($record->id_kavling, 0, 15) . '-' . now()->format('ymdHis')],
             Psjb::class => ['id_kavling' => $record->id_kavling, 'id_psjb' => $record->id_psjb, 'id_berkas' => 'BRK-' . substr($record->id_kavling, 0, 15) . '-' . now()->format('ymdHis')],
             Pemberkasan::class => $nextClass === ProsesBank::class
