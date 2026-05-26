@@ -16,6 +16,58 @@ use Illuminate\Database\Eloquent\Model;
 
 class PipelineFlowService
 {
+    public function getCurrentStageLabel(Konsumen $record): string
+    {
+        $kavling = $record->kavling;
+        if (!$kavling) {
+            return 'Input Konsumen';
+        }
+
+        $chain = $record->status_cash === 'YA'
+            ? [
+                PpjbDev::class => 'PPJB Developer',
+                Akad::class => 'Akad',
+                Bast::class => 'BAST',
+            ]
+            : [
+                BiChecking::class => 'Bi Checking',
+                Psjb::class => 'PSJB',
+                Pemberkasan::class => 'Pemberkasan',
+                ProsesBank::class => 'Proses Bank',
+                PpjbDev::class => 'PPJB Developer',
+                Akad::class => 'Akad',
+                Bast::class => 'BAST',
+            ];
+
+        $relationMap = [
+            BiChecking::class => 'biChecking',
+            Psjb::class => 'psjb',
+            Pemberkasan::class => 'pemberkasan',
+            ProsesBank::class => 'prosesBank',
+            PpjbDev::class => 'ppjbDev',
+            Akad::class => 'akad',
+            Bast::class => 'bast',
+        ];
+
+        foreach ($chain as $stageClass => $stageLabel) {
+            $existing = $kavling->{$relationMap[$stageClass]};
+
+            if (!$existing) {
+                return $stageLabel;
+            }
+
+            if ($stageClass === ProsesBank::class && in_array($existing->jenis_respon, ['Reject', 'Revisi'])) {
+                return 'Proses Bank (Berhenti)';
+            }
+
+            if ($existing->status_data !== 'Data Lengkap') {
+                return $stageLabel;
+            }
+        }
+
+        return 'Selesai';
+    }
+
     public function getNextStageForKonsumen(Konsumen $record): ?string
     {
         $kavling = $record->kavling;

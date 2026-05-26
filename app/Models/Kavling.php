@@ -84,6 +84,11 @@ class Kavling extends Model
         return $this->hasMany(Expense::class, 'id_kavling', 'id_kavling');
     }
 
+    public function danaTalangans()
+    {
+        return $this->hasMany(DanaTalangan::class, 'kavling_id', 'id_kavling');
+    }
+
     public function pipelineLogs()
     {
         return $this->hasMany(PipelineLog::class, 'id_kavling', 'id_kavling');
