@@ -15,6 +15,7 @@ use App\Models\ProsesBank;
 use App\Models\Psjb;
 use App\Observers\PipelineLogObserver;
 use App\Observers\PipelineObserver;
+use App\Observers\RejectKavlingObserver;
 use App\Observers\StatusDataObserver;
 use App\Scopes\CabangScope;
 use Illuminate\Support\ServiceProvider;
@@ -42,6 +43,7 @@ class AppServiceProvider extends ServiceProvider
             $model::observe(PipelineLogObserver::class);
         }
         BiChecking::observe(PipelineLogObserver::class);
+        ProsesBank::observe(RejectKavlingObserver::class);
 
         $statusDataModels = [
             Konsumen::class,

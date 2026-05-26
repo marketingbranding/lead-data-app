@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 
 class Pemberkasan extends Model
 {
+    use SoftDeletes;
     protected $table = 'pemberkasan';
 
     protected $fillable = [
@@ -44,6 +46,11 @@ class Pemberkasan extends Model
     public function prosesBank()
     {
         return $this->hasOne(ProsesBank::class, 'id_berkas', 'id_berkas');
+    }
+
+    public function revisiPemberkasans()
+    {
+        return $this->hasMany(RevisiPemberkasan::class, 'id_pemberkasan');
     }
 
     public function getStatusDataAttribute(): string

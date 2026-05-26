@@ -60,6 +60,10 @@ class PipelineFlowService
                 return 'Proses Bank (Berhenti)';
             }
 
+            if ($stageClass === Pemberkasan::class && $existing->revisiPemberkasans()->where('status', 'pending')->exists()) {
+                return 'Pemberkasan (Berhenti - Revisi)';
+            }
+
             if ($existing->status_data !== 'Data Lengkap') {
                 return $stageLabel;
             }
@@ -103,6 +107,12 @@ class PipelineFlowService
                 }
             }
 
+            if ($stageClass === Pemberkasan::class) {
+                if ($existing->revisiPemberkasans()->where('status', 'pending')->exists()) {
+                    return null;
+                }
+            }
+
             if ($existing->status_data !== 'Data Lengkap') {
                 return $stageClass;
             }
@@ -117,7 +127,7 @@ class PipelineFlowService
             Konsumen::class => $this->getNextStageForKonsumen($record),
             BiChecking::class => Psjb::class,
             Psjb::class => Pemberkasan::class,
-            Pemberkasan::class => $record->kavling?->isCashPath() ? PpjbDev::class : ProsesBank::class,
+            Pemberkasan::class => $record->revisiPemberkasans()->where('status', 'pending')->exists() ? null : ($record->kavling?->isCashPath() ? PpjbDev::class : ProsesBank::class),
             ProsesBank::class => in_array($record->jenis_respon, ['Reject', 'Revisi']) ? null : PpjbDev::class,
             PpjbDev::class => Akad::class,
             Akad::class => Bast::class,
@@ -140,7 +150,7 @@ class PipelineFlowService
             },
             BiChecking::class => 'Lanjut ke PSJB',
             Psjb::class => 'Lanjut ke Pemberkasan',
-            Pemberkasan::class => $record->kavling?->isCashPath() ? 'Lanjut ke PPJB Dev' : 'Lanjut ke Proses Bank',
+            Pemberkasan::class => $record->revisiPemberkasans()->where('status', 'pending')->exists() ? null : ($record->kavling?->isCashPath() ? 'Lanjut ke PPJB Dev' : 'Lanjut ke Proses Bank'),
             ProsesBank::class => in_array($record->jenis_respon, ['Reject', 'Revisi']) ? null : 'Lanjut ke PPJB Dev',
             PpjbDev::class => 'Lanjut ke Akad',
             Akad::class => 'Lanjut ke BAST',

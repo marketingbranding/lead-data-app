@@ -18,11 +18,24 @@ class EditPemberkasan extends EditRecord
 
         return [
             DeleteAction::make(),
+            Action::make('resubmit')
+                ->label('Resubmit')
+                ->icon('heroicon-o-arrow-path')
+                ->color('warning')
+                ->visible(fn (): bool =>
+                    $this->record->revisiPemberkasans()->count() > 0 &&
+                    $this->record->revisiPemberkasans()->where('status', '!=', 'selesai')->count() === 0
+                )
+                ->action(function () {
+                    $this->record->tipe_pemberkasan = 'lengkap';
+                    $this->record->save();
+                    $this->redirect($this->getResource()::getUrl('edit', ['record' => $this->record]));
+                }),
             Action::make('lanjutTahap')
                 ->label($service->getNextStageLabel($this->record))
                 ->icon('heroicon-o-arrow-right-circle')
                 ->color('success')
-                ->visible(fn (): bool => $this->record->status_data === 'Data Lengkap')
+                ->visible(fn (): bool => $this->record->status_data === 'Data Lengkap' && !$this->record->revisiPemberkasans()->where('status', 'pending')->exists())
                 ->action(fn () => redirect($service->getNextStageEditUrl($this->record))),
         ];
     }

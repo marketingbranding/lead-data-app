@@ -104,7 +104,7 @@ class Kavling extends Model
         if ($this->relationLoaded('bast') ? $this->bast : $this->bast()->exists()) {
             return 'Terjual';
         }
-        if ($this->relationLoaded('konsumens') ? $this->konsumens->isNotEmpty() : $this->konsumens()->exists()) {
+        if ($this->relationLoaded('konsumens') ? $this->konsumens->where('status_konsumen', 'aktif')->isNotEmpty() : $this->konsumens()->where('status_konsumen', 'aktif')->exists()) {
             return 'Dipesan';
         }
         return 'Tersedia';

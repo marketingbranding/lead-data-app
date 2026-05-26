@@ -43,6 +43,15 @@ class PemberkasansTable
                     ->badge()
                     ->color(fn (string $state): string => $state === 'Data Lengkap' ? 'success' : 'danger')
                     ->sortable(),
+                TextColumn::make('revisi_summary')
+                    ->label('Revisi')
+                    ->getStateUsing(fn ($record) => $record->revisiPemberkasans()
+                        ->selectRaw("COUNT(*) as total, SUM(CASE WHEN status = 'pending' THEN 1 ELSE 0 END) as pending")
+                        ->first()
+                    )
+                    ->formatStateUsing(fn ($state) => $state ? "{$state->pending} pending / {$state->total} total" : '-')
+                    ->badge()
+                    ->color(fn ($state) => $state && $state->pending > 0 ? 'warning' : 'success'),
                 TextColumn::make('created_at')->dateTime()->sortable()->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
@@ -75,7 +84,7 @@ class PemberkasansTable
                     ->label(fn ($record) => app(PipelineFlowService::class)->getNextStageLabel($record))
                     ->icon('heroicon-o-arrow-right-circle')
                     ->color('success')
-                    ->visible(fn ($record) => $record->status_data === 'Data Lengkap')
+                    ->visible(fn ($record) => $record->status_data === 'Data Lengkap' && !$record->revisiPemberkasans()->where('status', 'pending')->exists())
                     ->action(fn ($record) => redirect(app(PipelineFlowService::class)->getNextStageEditUrl($record))),
             ])
             ->toolbarActions([

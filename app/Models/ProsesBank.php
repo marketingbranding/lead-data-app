@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 
 class ProsesBank extends Model
 {
+    use SoftDeletes;
     protected $table = 'proses_bank';
 
     protected $fillable = [
@@ -19,8 +21,6 @@ class ProsesBank extends Model
         'approved_tenor',
         'lead_time_hari',
         'status',
-        'kategori_revisi',
-        'detail_revisi',
         'keterangan',
         'status_data',
     ];
@@ -42,6 +42,11 @@ class ProsesBank extends Model
     public function ppjbDev()
     {
         return $this->hasOne(PpjbDev::class, 'no_sp3k', 'no_sp3k');
+    }
+
+    public function revisiProsesBanks()
+    {
+        return $this->hasMany(RevisiProsesBank::class, 'id_proses_bank');
     }
 
     public function getStatusDataAttribute(): string

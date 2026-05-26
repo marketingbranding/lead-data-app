@@ -18,6 +18,20 @@ class EditProsesBank extends EditRecord
 
         return [
             DeleteAction::make(),
+            Action::make('resubmit')
+                ->label('Resubmit')
+                ->icon('heroicon-o-arrow-path')
+                ->color('warning')
+                ->visible(fn (): bool =>
+                    $this->record->jenis_respon === 'Revisi' &&
+                    $this->record->revisiProsesBanks()->count() > 0 &&
+                    $this->record->revisiProsesBanks()->where('status', '!=', 'selesai')->count() === 0
+                )
+                ->action(function () {
+                    $this->record->jenis_respon = 'Approved';
+                    $this->record->save();
+                    $this->redirect($this->getResource()::getUrl('edit', ['record' => $this->record]));
+                }),
             Action::make('lanjutTahap')
                 ->label($service->getNextStageLabel($this->record))
                 ->icon('heroicon-o-arrow-right-circle')

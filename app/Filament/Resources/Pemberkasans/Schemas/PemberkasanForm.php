@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Pemberkasans\Schemas;
 
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Placeholder;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
@@ -30,6 +31,7 @@ class PemberkasanForm
                         'banding' => 'Banding',
                         'pip' => 'PIP',
                         'revisi' => 'Revisi',
+                        'lengkap' => 'Lengkap',
                     ])
                     ->live(),
                 DatePicker::make('tanggal_terima_bank')
@@ -60,6 +62,23 @@ class PemberkasanForm
                     ))
                     ->columnSpanFull(),
                 Textarea::make('keterangan'),
+                Repeater::make('revisiPemberkasans')
+                    ->label('Revisi')
+                    ->relationship('revisiPemberkasans')
+                    ->schema([
+                        TextInput::make('kategori')
+                            ->required()
+                            ->maxLength(100),
+                        Textarea::make('detail'),
+                        Select::make('status')
+                            ->required()
+                            ->options([
+                                'pending' => 'Pending',
+                                'selesai' => 'Selesai',
+                            ]),
+                    ])
+                    ->defaultItems(0)
+                    ->addActionLabel('Tambah Revisi'),
                 Placeholder::make('status_data')
                     ->label('Status Data')
                     ->content(fn ($get) => new HtmlString(

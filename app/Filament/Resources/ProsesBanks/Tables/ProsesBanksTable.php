@@ -43,6 +43,15 @@ class ProsesBanksTable
                     ->badge()
                     ->color(fn (string $state): string => $state === 'Data Lengkap' ? 'success' : 'danger')
                     ->sortable(),
+                TextColumn::make('revisi_summary')
+                    ->label('Revisi')
+                    ->getStateUsing(fn ($record) => $record->revisiProsesBanks()
+                        ->selectRaw("COUNT(*) as total, SUM(CASE WHEN status = 'pending' THEN 1 ELSE 0 END) as pending")
+                        ->first()
+                    )
+                    ->formatStateUsing(fn ($state) => $state ? "{$state->pending} pending / {$state->total} total" : '-')
+                    ->badge()
+                    ->color(fn ($state) => $state && $state->pending > 0 ? 'warning' : 'success'),
                 TextColumn::make('created_at')->dateTime()->sortable()->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([

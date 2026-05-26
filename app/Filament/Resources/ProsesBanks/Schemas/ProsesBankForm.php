@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\ProsesBanks\Schemas;
 
 use Filament\Forms\Components\Placeholder;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
@@ -62,9 +63,26 @@ class ProsesBankForm
                         }
                     ))
                     ->columnSpanFull(),
-                TextInput::make('kategori_revisi')
-                    ->maxLength(100),
-                Textarea::make('detail_revisi'),
+                Repeater::make('revisiProsesBanks')
+                    ->label('Revisi')
+                    ->relationship('revisiProsesBanks')
+                    ->schema([
+                        Select::make('kategori')
+                            ->required()
+                            ->options([
+                                'Rekening Koran' => 'Rekening Koran',
+                                'Slip Gaji' => 'Slip Gaji',
+                            ]),
+                        Textarea::make('detail'),
+                        Select::make('status')
+                            ->required()
+                            ->options([
+                                'pending' => 'Pending',
+                                'selesai' => 'Selesai',
+                            ]),
+                    ])
+                    ->defaultItems(0)
+                    ->addActionLabel('Tambah Revisi'),
                 Textarea::make('keterangan'),
                 Placeholder::make('status_data')
                     ->label('Status Data')
