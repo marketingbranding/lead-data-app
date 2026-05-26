@@ -8,8 +8,7 @@ class CampaignIdService
 {
     public function generate(): string
     {
-        $last = Campaign::withTrashed()
-            ->where('campaign_id', 'like', 'CMP-%')
+        $last = Campaign::where('campaign_id', 'like', 'CMP-%')
             ->orderByRaw('CAST(SUBSTRING_INDEX(campaign_id, "-", -1) AS UNSIGNED) DESC')
             ->lockForUpdate()
             ->value('campaign_id');

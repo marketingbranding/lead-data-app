@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\DanaTalangans\Pages;
 
+use App\Filament\Actions\HasExportImport;
 use App\Filament\Resources\DanaTalangans\DanaTalanganResource;
 use App\Models\DanaTalangan;
 use Filament\Actions\Action;
@@ -10,11 +11,14 @@ use Filament\Resources\Pages\ListRecords;
 
 class ListDanaTalangans extends ListRecords
 {
+    use HasExportImport;
+
     protected static string $resource = DanaTalanganResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
+            ...$this->getExportImportActions(),
             Action::make('bbgReminder')
                 ->label('')
                 ->icon('heroicon-o-bell-alert')

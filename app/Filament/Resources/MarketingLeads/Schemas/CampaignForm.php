@@ -21,15 +21,23 @@ class CampaignForm
                     ->disabled()
                     ->dehydrated(false)
                     ->columnSpanFull(),
+                Select::make('cabang_id')
+                    ->label('Cabang')
+                    ->relationship('cabang', 'nama')
+                    ->searchable()
+                    ->preload()
+                    ->native(false)
+                    ->default(fn () => auth()->user()?->cabang_id)
+                    ->disabled(fn () => auth()->user()?->hasRole('admin-cabang'))
+                    ->required()
+                    ->live(),
                 Select::make('proyek_id')
                     ->label('Nama Proyek')
                     ->required()
                     ->searchable()
                     ->live()
-                    ->options(fn ($get) => Proyek::when(
-                        auth()->user()?->cabang_id,
-                        fn ($q, $v) => $q->where('cabang_id', $v)
-                    )->pluck('nama_proyek', 'id')),
+                    ->options(fn ($get) => Proyek::where('cabang_id', $get('cabang_id') ?? auth()->user()?->cabang_id)
+                        ->pluck('nama_proyek', 'id')),
                 Select::make('kategori_promosi')
                     ->label('Kategori Promosi')
                     ->required()
