@@ -29,6 +29,7 @@ class CampaignForm
                     ->native(false)
                     ->default(fn () => auth()->user()?->cabang_id)
                     ->disabled(fn () => auth()->user()?->hasRole('admin-cabang'))
+                    ->dehydrated(true)
                     ->required()
                     ->live(),
                 Select::make('proyek_id')

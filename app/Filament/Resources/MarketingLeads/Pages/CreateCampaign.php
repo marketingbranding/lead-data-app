@@ -12,7 +12,7 @@ class CreateCampaign extends CreateRecord
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
-        $data['cabang_id'] = auth()->user()->cabang_id;
+        $data['cabang_id'] ??= auth()->user()->cabang_id;
         $data['campaign_id'] = app(CampaignIdService::class)->generate();
         return $data;
     }
