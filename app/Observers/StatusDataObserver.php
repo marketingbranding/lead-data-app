@@ -35,13 +35,6 @@ class StatusDataObserver
 
         $lengkap = true;
 
-        // Pemberkasan: bank fields hanya mandatory untuk KPR
-        if ($model instanceof Pemberkasan) {
-            if ($model->tipe_pemberkasan !== 'CASH') {
-                $fields = array_merge($fields, ['tanggal_terima_bank', 'bank']);
-            }
-        }
-
         foreach ($fields as $field) {
             if (blank($model->{$field})) {
                 $lengkap = false;

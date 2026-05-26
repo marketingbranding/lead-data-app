@@ -27,8 +27,16 @@ class AkadForm
                 DatePicker::make('tanggal_akad')
                     ->required()
                     ->live(onBlur: true),
-                TextInput::make('kualitas_akad')
-                    ->maxLength(100),
+                Select::make('kualitas_akad')
+                    ->label('Kualitas Akad')
+                    ->searchable()
+                    ->native(false)
+                    ->options([
+                        'Akad Bangunan Belum Jadi' => 'Akad Bangunan Belum Jadi',
+                        'Akad DP Belum Lunas' => 'Akad DP Belum Lunas',
+                        'Akad KLT Belum Lunas' => 'Akad KLT Belum Lunas',
+                        'Akad Sempurna' => 'Akad Sempurna',
+                    ]),
                 TextInput::make('lead_time_hari')
                     ->numeric()
                     ->disabled(),

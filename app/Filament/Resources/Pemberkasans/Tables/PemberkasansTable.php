@@ -29,6 +29,10 @@ class PemberkasansTable
                 TextColumn::make('kc_unit')->label('KC/Unit')->sortable()->searchable(),
                 TextColumn::make('tanggal_terima_bank')->date()->sortable(),
                 TextColumn::make('tipe_pemberkasan')->sortable()->searchable(),
+                TextColumn::make('request_plafond')
+                    ->label('Request Plafond')
+                    ->money('IDR', decimalPlaces: 0, locale: 'id')
+                    ->sortable(),
                 TextColumn::make('lead_time_hari')->sortable(),
                 TextColumn::make('status')
                     ->badge()

@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Bast extends Model
 {
@@ -36,6 +38,23 @@ class Bast extends Model
     public function getStatusDataAttribute(): string
     {
         return !blank($this->tanggal_bast) ? 'Data Lengkap' : 'Data Belum Lengkap';
+    }
+
+    public function getStatusAttribute(): ?string
+    {
+        $target = DB::table('lead_times')->where('tahap_tujuan', 'bast')->value('target_hari_kerja');
+
+        if ($target === null) {
+            return null;
+        }
+
+        $hari = $this->lead_time_hari ?? ($this->created_at ? (int) Carbon::parse($this->created_at)->diffInWeekdays(now()) : null);
+
+        if ($hari === null) {
+            return null;
+        }
+
+        return $hari > $target ? 'terlambat' : 'ontime';
     }
 
     public function getJenisPipelineAttribute(): string

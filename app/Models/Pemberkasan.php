@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Pemberkasan extends Model
 {
@@ -47,14 +49,27 @@ class Pemberkasan extends Model
     public function getStatusDataAttribute(): string
     {
         $mandatory = ['tipe_pemberkasan'];
-        if ($this->tipe_pemberkasan !== 'CASH') {
-            $mandatory[] = 'tanggal_terima_bank';
-            $mandatory[] = 'bank';
-        }
         foreach ($mandatory as $field) {
             if (blank($this->{$field})) return 'Data Belum Lengkap';
         }
         return 'Data Lengkap';
+    }
+
+    public function getStatusAttribute(): ?string
+    {
+        $target = DB::table('lead_times')->where('tahap_tujuan', 'pemberkasan')->value('target_hari_kerja');
+
+        if ($target === null) {
+            return null;
+        }
+
+        $hari = $this->lead_time_hari ?? ($this->created_at ? (int) Carbon::parse($this->created_at)->diffInWeekdays(now()) : null);
+
+        if ($hari === null) {
+            return null;
+        }
+
+        return $hari > $target ? 'terlambat' : 'ontime';
     }
 
     public function getJenisPipelineAttribute(): string

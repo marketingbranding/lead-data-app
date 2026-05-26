@@ -26,32 +26,50 @@ class PsjbForm
                 DatePicker::make('tanggal_psjb')
                     ->required()
                     ->live(onBlur: true),
-                TextInput::make('nama_koordinator')
+                Select::make('nama_koordinator')
+                    ->label('Nama Koordinator')
+                    ->searchable()
+                    ->preload()
+                    ->native(false)
+                    ->options(fn () => \App\Models\Sales::whereNotNull('nama_koordinator')->where('nama_koordinator', '!=', '')->distinct()->pluck('nama_koordinator', 'nama_koordinator'))
                     ->required()
-                    ->maxLength(100)
-                    ->live(onBlur: true),
-                TextInput::make('nama_sales')
+                    ->live(),
+                Select::make('nama_sales')
+                    ->label('Nama Sales')
+                    ->searchable()
+                    ->preload()
+                    ->native(false)
+                    ->options(function ($get) {
+                        $query = \App\Models\Sales::query();
+                        if ($get('nama_koordinator')) {
+                            $query->where('nama_koordinator', $get('nama_koordinator'));
+                        }
+                        return $query->pluck('nama_sales', 'nama_sales');
+                    })
                     ->required()
-                    ->maxLength(100)
-                    ->live(onBlur: true),
+                    ->live(),
                 TextInput::make('harga_unit')
                     ->required()
                     ->numeric()
+                    ->prefix('Rp')
                     ->live(onBlur: true)
                     ->mask(RawJs::make('$money($input, ".", ",")'))
                     ->dehydrateStateUsing(fn ($state) => (int) preg_replace('/[^0-9]/', '', $state)),
                 DatePicker::make('tanggal_utj'),
                 TextInput::make('utj')
                     ->numeric()
+                    ->prefix('Rp')
                     ->mask(RawJs::make('$money($input, ".", ",")'))
                     ->dehydrateStateUsing(fn ($state) => (int) preg_replace('/[^0-9]/', '', $state)),
                 DatePicker::make('tanggal_dp_klt'),
                 TextInput::make('dp')
                     ->numeric()
+                    ->prefix('Rp')
                     ->mask(RawJs::make('$money($input, ".", ",")'))
                     ->dehydrateStateUsing(fn ($state) => (int) preg_replace('/[^0-9]/', '', $state)),
                 TextInput::make('klt')
                     ->numeric()
+                    ->prefix('Rp')
                     ->mask(RawJs::make('$money($input, ".", ",")'))
                     ->dehydrateStateUsing(fn ($state) => (int) preg_replace('/[^0-9]/', '', $state)),
                 TextInput::make('detail_klt')

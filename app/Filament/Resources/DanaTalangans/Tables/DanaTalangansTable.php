@@ -26,14 +26,7 @@ class DanaTalangansTable
                     ->badge()
                     ->color(fn (string $state): string => $state === 'Active' ? 'success' : 'danger')
                     ->sortable(),
-                TextColumn::make('bbg_reminder')
-                    ->label('BBG Reminder')
-                    ->getStateUsing(fn ($record) => $record->bbg_remaining_days !== null && $record->bbg_remaining_days <= 30
-                        ? $record->bbg_remaining_days . ' hari lagi'
-                        : '-')
-                    ->badge()
-                    ->color(fn (string $state): string => $state !== '-' ? 'warning' : 'gray')
-                    ->visibleFrom('md'),
+
                 TextColumn::make('tgl_pengajuan_dana_talangan')->label('Tgl Pengajuan')->date()->sortable(),
                 TextColumn::make('tgl_pengembalian_dana_talangan')->label('Tgl Pengembalian')->date()->sortable(),
                 TextColumn::make('penyelesaian')->label('Penyelesaian')->limit(30)->searchable(),

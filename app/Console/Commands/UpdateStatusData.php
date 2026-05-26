@@ -96,13 +96,6 @@ class UpdateStatusData extends Command
 
     protected function checkMandatory(Model $record, string $modelClass, array $fields): bool
     {
-        // Pemberkasan CASH: bank fields tidak mandatory
-        if ($modelClass === Pemberkasan::class) {
-            if ($record->tipe_pemberkasan !== 'CASH') {
-                $fields = array_merge($fields, ['tanggal_terima_bank', 'bank']);
-            }
-        }
-
         foreach ($fields as $field) {
             if (blank($record->{$field})) {
                 return false;

@@ -43,6 +43,7 @@ class ProsesBankForm
                 TextInput::make('approved_plafond')
                     ->required()
                     ->numeric()
+                    ->prefix('Rp')
                     ->live(onBlur: true)
                     ->mask(RawJs::make('$money($input, ".", ",")'))
                     ->dehydrateStateUsing(fn ($state) => (int) preg_replace('/[^0-9]/', '', $state)),

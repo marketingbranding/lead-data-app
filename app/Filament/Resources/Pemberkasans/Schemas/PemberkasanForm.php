@@ -27,29 +27,25 @@ class PemberkasanForm
                     ->required()
                     ->options([
                         'registrasi' => 'Registrasi',
-                        'CASH' => 'CASH',
+                        'banding' => 'Banding',
+                        'pip' => 'PIP',
+                        'revisi' => 'Revisi',
                     ])
                     ->live(),
                 DatePicker::make('tanggal_terima_bank')
-                    ->required(fn ($get) => $get('tipe_pemberkasan') !== 'CASH')
-                    ->hidden(fn ($get) => $get('tipe_pemberkasan') === 'CASH')
                     ->live(onBlur: true),
                 TextInput::make('bank')
-                    ->required(fn ($get) => $get('tipe_pemberkasan') !== 'CASH')
                     ->maxLength(100)
-                    ->hidden(fn ($get) => $get('tipe_pemberkasan') === 'CASH')
                     ->live(onBlur: true),
                 TextInput::make('kc_unit')
-                    ->maxLength(100)
-                    ->hidden(fn ($get) => $get('tipe_pemberkasan') === 'CASH'),
+                    ->maxLength(100),
                 TextInput::make('request_plafond')
                     ->numeric()
-                    ->hidden(fn ($get) => $get('tipe_pemberkasan') === 'CASH')
+                    ->prefix('Rp')
                     ->mask(RawJs::make('$money($input, ".", ",")'))
                     ->dehydrateStateUsing(fn ($state) => (int) preg_replace('/[^0-9]/', '', $state)),
                 TextInput::make('request_tenor')
-                    ->numeric()
-                    ->hidden(fn ($get) => $get('tipe_pemberkasan') === 'CASH'),
+                    ->numeric(),
                 TextInput::make('lead_time_hari')
                     ->numeric()
                     ->disabled(),
@@ -67,11 +63,7 @@ class PemberkasanForm
                 Placeholder::make('status_data')
                     ->label('Status Data')
                     ->content(fn ($get) => new HtmlString(
-                        (function () use ($get) {
-                            if (blank($get('tipe_pemberkasan'))) return false;
-                            if ($get('tipe_pemberkasan') === 'CASH') return true;
-                            return !blank($get('tanggal_terima_bank')) && !blank($get('bank'));
-                        })()
+                        !blank($get('tipe_pemberkasan'))
                             ? '<span style="color:#16a34a;font-weight:bold">Data Lengkap</span>'
                             : '<span style="color:#dc2626;font-weight:bold">Data Belum Lengkap</span>'
                     ))
