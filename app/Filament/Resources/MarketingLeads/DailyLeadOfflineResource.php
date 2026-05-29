@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\MarketingLeads;
 
-use App\Filament\Resources\MarketingLeads\Pages\CreateDailyLeadOffline;
 use App\Filament\Resources\MarketingLeads\Pages\EditDailyLeadOffline;
 use App\Filament\Resources\MarketingLeads\Pages\ListDailyLeadOfflines;
 use App\Filament\Resources\MarketingLeads\Schemas\DailyLeadOfflineForm;
@@ -48,7 +47,6 @@ class DailyLeadOfflineResource extends Resource
     {
         return [
             'index' => ListDailyLeadOfflines::route('/'),
-            'create' => CreateDailyLeadOffline::route('/create'),
             'edit' => EditDailyLeadOffline::route('/{record}/edit'),
         ];
     }

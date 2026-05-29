@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\MarketingLeads;
 
-use App\Filament\Resources\MarketingLeads\Pages\CreateDailyLeadOnline;
 use App\Filament\Resources\MarketingLeads\Pages\EditDailyLeadOnline;
 use App\Filament\Resources\MarketingLeads\Pages\ListDailyLeadOnlines;
 use App\Filament\Resources\MarketingLeads\Schemas\DailyLeadOnlineForm;
@@ -48,7 +47,6 @@ class DailyLeadOnlineResource extends Resource
     {
         return [
             'index' => ListDailyLeadOnlines::route('/'),
-            'create' => CreateDailyLeadOnline::route('/create'),
             'edit' => EditDailyLeadOnline::route('/{record}/edit'),
         ];
     }

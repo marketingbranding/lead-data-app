@@ -4,7 +4,6 @@ namespace App\Filament\Resources\MarketingLeads\Pages;
 
 use App\Filament\Actions\HasExportImport;
 use App\Filament\Resources\MarketingLeads\DailyLeadOfflineResource;
-use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
 class ListDailyLeadOfflines extends ListRecords
@@ -17,7 +16,6 @@ class ListDailyLeadOfflines extends ListRecords
     {
         return [
             ...$this->getExportImportActions(),
-            CreateAction::make(),
         ];
     }
 }
