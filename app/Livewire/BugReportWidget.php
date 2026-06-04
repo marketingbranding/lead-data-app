@@ -37,6 +37,8 @@ class BugReportWidget extends Component
             'prioritas' => $this->prioritas,
         ]);
 
+        $report->refresh();
+
         $this->sendToDiscord($report);
 
         $this->reset(['judul', 'deskripsi', 'prioritas', 'open']);
@@ -62,7 +64,8 @@ class BugReportWidget extends Component
         ]);
 
         $user = $report->user;
-        $cabang = $user?->cabang?->nama ?? '-';
+        $namaUser = $user ? $user->name : '-';
+        $cabang = $user && $user->cabang ? $user->cabang->nama : '-';
 
         $prioritasEmoji = match ($report->prioritas) {
             'rendah' => '🟢',
@@ -72,28 +75,15 @@ class BugReportWidget extends Component
             default => '⚪',
         };
 
-        $payload = json_encode([
-            'embeds' => [[
-                'title' => $report->judul,
-                'description' => $report->deskripsi,
-                'color' => match ($report->prioritas) {
-                    'rendah' => 5763719,
-                    'sedang' => 16776960,
-                    'tinggi' => 15105570,
-                    'kritis' => 15548997,
-                    default => 9807270,
-                },
-                'fields' => [
-                    ['name' => 'Cabang', 'value' => $cabang, 'inline' => true],
-                    ['name' => 'Pelapor', 'value' => $user?->name ?? '-', 'inline' => true],
-                    ['name' => 'Prioritas', 'value' => "$prioritasEmoji {$report->prioritas}", 'inline' => true],
-                    ['name' => 'Status', 'value' => $report->status, 'inline' => true],
-                    ['name' => 'Waktu', 'value' => $report->created_at->format('d M Y H:i'), 'inline' => true],
-                ],
-                'footer' => ['text' => 'Bug Report • OASIS'],
-                'timestamp' => $report->created_at->toIso8601String(),
-            ]],
-        ]);
+        $teks = "**Bug Report: {$report->judul}**\n"
+            . "{$report->deskripsi}\n\n"
+            . "🏢 Cabang: {$cabang}\n"
+            . "👤 Pelapor: {$namaUser}\n"
+            . "{$prioritasEmoji} Prioritas: {$report->prioritas}\n"
+            . "📌 Status: {$report->status}\n"
+            . "🕐 Waktu: {$report->created_at->format('d M Y H:i')}";
+
+        $payload = json_encode(['content' => $teks]);
 
         $ch = curl_init($webhookUrl);
         curl_setopt($ch, CURLOPT_POST, 1);
