@@ -42,7 +42,7 @@
         </div>
 
         {{-- Form --}}
-        <div style="padding: 1rem;">
+        <div style="padding: 1rem; color: #111827;">
             @if ($errors->any())
                 <div style="margin-bottom: 0.75rem; padding: 0.5rem; background: #fef2f2; color: #dc2626; font-size: 0.875rem; border-radius: 0.5rem; border: 1px solid #fca5a5;">
                     @foreach ($errors->all() as $error)
@@ -57,7 +57,7 @@
                     <input
                         type="text"
                         wire:model="judul"
-                        style="width: 100%; border-radius: 0.5rem; border: 1px solid #d1d5db; font-size: 0.875rem; padding: 0.5rem 0.75rem; box-sizing: border-box;"
+                        style="width: 100%; border-radius: 0.5rem; border: 1px solid #d1d5db; font-size: 0.875rem; padding: 0.5rem 0.75rem; box-sizing: border-box; color: #111827;"
                         placeholder="Ringkasan masalah..."
                     >
                 </div>
@@ -67,7 +67,7 @@
                     <textarea
                         wire:model="deskripsi"
                         rows="3"
-                        style="width: 100%; border-radius: 0.5rem; border: 1px solid #d1d5db; font-size: 0.875rem; padding: 0.5rem 0.75rem; box-sizing: border-box; resize: vertical;"
+                        style="width: 100%; border-radius: 0.5rem; border: 1px solid #d1d5db; font-size: 0.875rem; padding: 0.5rem 0.75rem; box-sizing: border-box; resize: vertical; color: #111827;"
                         placeholder="Jelaskan masalah secara detail..."
                     ></textarea>
                 </div>
@@ -76,12 +76,12 @@
                     <label style="display: block; font-size: 0.875rem; font-weight: 500; color: #374151; margin-bottom: 0.25rem;">Prioritas</label>
                     <select
                         wire:model="prioritas"
-                        style="width: 100%; border-radius: 0.5rem; border: 1px solid #d1d5db; font-size: 0.875rem; padding: 0.5rem 0.75rem; box-sizing: border-box; background: white;"
+                        style="width: 100%; border-radius: 0.5rem; border: 1px solid #d1d5db; font-size: 0.875rem; padding: 0.5rem 0.75rem; box-sizing: border-box; background: white; color: #111827;"
                     >
-                        <option value="rendah">Rendah</option>
-                        <option value="sedang">Sedang</option>
-                        <option value="tinggi">Tinggi</option>
-                        <option value="kritis">Kritis</option>
+                        <option value="rendah" style="color: #111827;">Rendah</option>
+                        <option value="sedang" style="color: #111827;">Sedang</option>
+                        <option value="tinggi" style="color: #111827;">Tinggi</option>
+                        <option value="kritis" style="color: #111827;">Kritis</option>
                     </select>
                 </div>
             </div>
