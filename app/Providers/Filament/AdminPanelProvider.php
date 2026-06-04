@@ -34,7 +34,7 @@ class AdminPanelProvider extends PanelProvider
             ->brandName('OASIS')
             ->brandLogo(fn () => asset('logo.png'))
             ->brandLogoHeight('2.5rem')
-            ->favicon(asset('favicon.png'))
+            ->favicon('data:image/svg+xml,' . rawurlencode('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#d97706"/><text x="16" y="22" font-family="Arial,sans-serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">O</text></svg>'))
             ->login(\App\Filament\Auth\Pages\Login::class)
             ->authGuard('web')
             ->colors([
