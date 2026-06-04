@@ -8,7 +8,9 @@ use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Support\Facades\FilamentView;
 use Filament\View\PanelsRenderHook;
+use Illuminate\Support\Facades\Blade;
 use App\Filament\Pages\Dashboard;
+use App\Filament\Widgets\BugReportWidget;
 use App\Filament\Widgets\PipelineFunnelWidget;
 use App\Filament\Widgets\StatsOverviewWidget;
 use Filament\Panel;
@@ -56,6 +58,7 @@ class AdminPanelProvider extends PanelProvider
             ->widgets([
                 StatsOverviewWidget::class,
                 PipelineFunnelWidget::class,
+                BugReportWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -88,6 +91,11 @@ class AdminPanelProvider extends PanelProvider
         FilamentView::registerRenderHook(
             PanelsRenderHook::SCRIPTS_AFTER,
             fn () => app(Vite::class)('resources/js/alpine-mask.js'),
+        );
+
+        FilamentView::registerRenderHook(
+            PanelsRenderHook::BODY_END,
+            fn () => Blade::render('@livewire(\'bug-report-widget\')'),
         );
     }
 }
