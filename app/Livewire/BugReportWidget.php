@@ -4,7 +4,6 @@ namespace App\Livewire;
 
 use App\Models\BugReport;
 use Filament\Notifications\Notification;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
@@ -62,50 +61,57 @@ class BugReportWidget extends Component
             'judul' => $report->judul,
         ]);
 
-        try {
-            $user = $report->user;
-            $cabang = $user?->cabang?->nama ?? '-';
+        $user = $report->user;
+        $cabang = $user?->cabang?->nama ?? '-';
 
-            $prioritasEmoji = match ($report->prioritas) {
-                'rendah' => '🟢',
-                'sedang' => '🟡',
-                'tinggi' => '🟠',
-                'kritis' => '🔴',
-                default => '⚪',
-            };
+        $prioritasEmoji = match ($report->prioritas) {
+            'rendah' => '🟢',
+            'sedang' => '🟡',
+            'tinggi' => '🟠',
+            'kritis' => '🔴',
+            default => '⚪',
+        };
 
-            $response = Http::timeout(10)->withoutVerifying()->post($webhookUrl, [
-                'embeds' => [[
-                    'title' => $report->judul,
-                    'description' => $report->deskripsi,
-                    'color' => match ($report->prioritas) {
-                        'rendah' => 5763719,
-                        'sedang' => 16776960,
-                        'tinggi' => 15105570,
-                        'kritis' => 15548997,
-                        default => 9807270,
-                    },
-                    'fields' => [
-                        ['name' => 'Cabang', 'value' => $cabang, 'inline' => true],
-                        ['name' => 'Pelapor', 'value' => $user?->name ?? '-', 'inline' => true],
-                        ['name' => 'Prioritas', 'value' => "$prioritasEmoji {$report->prioritas}", 'inline' => true],
-                        ['name' => 'Status', 'value' => $report->status, 'inline' => true],
-                        ['name' => 'Waktu', 'value' => $report->created_at->format('d M Y H:i'), 'inline' => true],
-                    ],
-                    'footer' => ['text' => 'Bug Report • OASIS'],
-                    'timestamp' => $report->created_at->toIso8601String(),
-                ]],
-            ]);
+        $payload = json_encode([
+            'embeds' => [[
+                'title' => $report->judul,
+                'description' => $report->deskripsi,
+                'color' => match ($report->prioritas) {
+                    'rendah' => 5763719,
+                    'sedang' => 16776960,
+                    'tinggi' => 15105570,
+                    'kritis' => 15548997,
+                    default => 9807270,
+                },
+                'fields' => [
+                    ['name' => 'Cabang', 'value' => $cabang, 'inline' => true],
+                    ['name' => 'Pelapor', 'value' => $user?->name ?? '-', 'inline' => true],
+                    ['name' => 'Prioritas', 'value' => "$prioritasEmoji {$report->prioritas}", 'inline' => true],
+                    ['name' => 'Status', 'value' => $report->status, 'inline' => true],
+                    ['name' => 'Waktu', 'value' => $report->created_at->format('d M Y H:i'), 'inline' => true],
+                ],
+                'footer' => ['text' => 'Bug Report • OASIS'],
+                'timestamp' => $report->created_at->toIso8601String(),
+            ]],
+        ]);
 
-            if (!$response->successful()) {
-                Log::warning('Discord webhook responded with error', [
-                    'status' => $response->status(),
-                    'body' => $response->body(),
-                ]);
-            }
-        } catch (\Exception $e) {
-            Log::error('Discord webhook exception', [
-                'message' => $e->getMessage(),
+        $ch = curl_init($webhookUrl);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+        $res = curl_exec($ch);
+        $http = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $error = curl_error($ch);
+        curl_close($ch);
+
+        if ($http !== 204) {
+            Log::warning('Discord webhook failed', [
+                'status' => $http,
+                'error' => $error,
+                'body' => $res,
             ]);
         }
     }
