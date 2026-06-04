@@ -1,0 +1,1 @@
+@livewire('bug-report-widget')
