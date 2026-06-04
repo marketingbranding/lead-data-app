@@ -7,7 +7,9 @@ use App\Filament\Resources\BugReports\Pages\ListBugReports;
 use App\Filament\Resources\BugReports\Schemas\BugReportForm;
 use App\Filament\Resources\BugReports\Tables\BugReportsTable;
 use App\Models\BugReport;
+use BackedEnum;
 use Filament\Resources\Resource;
+use UnitEnum;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
@@ -22,10 +24,7 @@ class BugReportResource extends Resource
 
     protected static ?int $navigationSort = 99;
 
-    public static function getNavigationIcon(): string|array|null
-    {
-        return Heroicon::OutlinedBugAnt;
-    }
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBugAnt;
 
     public static function canViewAny(): bool
     {
