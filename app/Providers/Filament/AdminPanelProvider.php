@@ -34,6 +34,7 @@ class AdminPanelProvider extends PanelProvider
             ->brandName('OASIS')
             ->brandLogo(fn () => asset('logo.png'))
             ->brandLogoHeight('2.5rem')
+            ->favicon(asset('favicon.png'))
             ->login(\App\Filament\Auth\Pages\Login::class)
             ->authGuard('web')
             ->colors([
