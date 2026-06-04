@@ -10,12 +10,35 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ExportService
 {
-    protected array $excludeColumns = ['created_at', 'updated_at'];
+    protected array $excludeColumns = ['created_at', 'updated_at', 'deleted_at'];
 
-    public function downloadXlsx(string $table): BinaryFileResponse
+    public function downloadXlsx(string $table, array $relations = []): BinaryFileResponse
     {
-        $headers = $this->getHeaders($table);
-        $rows = DB::table($table)->get();
+        $columns = $this->getHeaders($table);
+
+        $query = DB::table($table);
+
+        $selects = [];
+        foreach ($columns as $col) {
+            if (isset($relations[$col])) {
+                $rel = $relations[$col];
+                $selects[] = DB::raw("{$rel['table']}.{$rel['display']} as {$col}");
+                $query->leftJoin($rel['table'], "{$table}.{$col}", '=', "{$rel['table']}.{$rel['reference']}");
+            } else {
+                $selects[] = "{$table}.{$col}";
+            }
+        }
+
+        $rows = $query->select($selects)->get();
+
+        $headers = [];
+        foreach ($columns as $col) {
+            if (isset($relations[$col])) {
+                $headers[] = $relations[$col]['label'] ?? $col;
+            } else {
+                $headers[] = $col;
+            }
+        }
 
         $filename = $table . '_' . date('Y-m-d') . '.xlsx';
         $tempPath = sys_get_temp_dir() . '/' . uniqid('export_', true) . '.xlsx';
@@ -29,7 +52,7 @@ class ExportService
         foreach ($rows as $row) {
             $data = (array) $row;
             $values = [];
-            foreach ($headers as $col) {
+            foreach ($columns as $col) {
                 $values[] = $data[$col] ?? '';
             }
             $writer->addRow(Row::fromValues($values));

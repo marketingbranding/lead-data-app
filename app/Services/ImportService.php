@@ -9,7 +9,7 @@ class ImportService
 {
     protected array $excludeColumns = ['created_at', 'updated_at'];
 
-    public function importXlsx(string $table, string $filePath): array
+    public function importXlsx(string $table, string $filePath, array $relations = []): array
     {
         $headers = $this->getHeaders($table);
         $pk = $this->getPrimaryKey($table);
@@ -37,13 +37,34 @@ class ImportService
                 $data = array_filter($data, fn ($v) => $v !== null && $v !== '', ARRAY_FILTER_USE_BOTH);
 
                 try {
+                    DB::beginTransaction();
+
+                    foreach ($relations as $fkCol => $rel) {
+                        if (isset($data[$fkCol]) && $data[$fkCol] !== '') {
+                            $lookup = DB::table($rel['table'])
+                                ->where($rel['display'], $data[$fkCol])
+                                ->first();
+
+                            if (!$lookup) {
+                                throw new \Exception(
+                                    ($rel['label'] ?? $fkCol) . " '{$data[$fkCol]}' tidak ditemukan"
+                                );
+                            }
+
+                            $data[$fkCol] = $lookup->{$rel['reference']};
+                        }
+                    }
+
                     if ($pk && isset($data[$pk])) {
                         DB::table($table)->updateOrInsert([$pk => $data[$pk]], $data);
                     } else {
                         DB::table($table)->insert($data);
                     }
+
+                    DB::commit();
                     $imported++;
                 } catch (\Exception $e) {
+                    DB::rollBack();
                     $errors[] = 'Baris ' . ($imported + $skipped + 2) . ': ' . $e->getMessage();
                     $skipped++;
                 }

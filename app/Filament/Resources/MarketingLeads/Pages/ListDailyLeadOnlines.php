@@ -12,6 +12,18 @@ class ListDailyLeadOnlines extends ListRecords
 
     protected static string $resource = DailyLeadOnlineResource::class;
 
+    protected function getExportRelations(): array
+    {
+        return [
+            'campaign_id' => [
+                'table' => 'campaigns',
+                'display' => 'sumber_promosi',
+                'reference' => 'id',
+                'label' => 'Campaign',
+            ],
+        ];
+    }
+
     protected function getHeaderActions(): array
     {
         return [

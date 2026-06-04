@@ -10,6 +10,11 @@ use Filament\Notifications\Notification;
 
 trait HasExportImport
 {
+    protected function getExportRelations(): array
+    {
+        return [];
+    }
+
     protected function getExportImportActions(): array
     {
         return [
@@ -28,7 +33,7 @@ trait HasExportImport
             ->color('success')
             ->action(function () use ($table) {
                 $service = app(ExportService::class);
-                return $service->downloadXlsx($table);
+                return $service->downloadXlsx($table, $this->getExportRelations());
             });
     }
 
@@ -57,7 +62,7 @@ trait HasExportImport
                 }
 
                 $service = app(ImportService::class);
-                $result = $service->importXlsx($table, $tmpPath);
+                $result = $service->importXlsx($table, $tmpPath, $this->getExportRelations());
 
                 Notification::make()
                     ->title('Import Selesai')

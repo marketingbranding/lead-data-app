@@ -15,6 +15,42 @@ class ListDanaTalangans extends ListRecords
 
     protected static string $resource = DanaTalanganResource::class;
 
+    protected function getExportRelations(): array
+    {
+        return [
+            'cabang_id' => [
+                'table' => 'cabangs',
+                'display' => 'nama',
+                'reference' => 'id',
+                'label' => 'Cabang',
+            ],
+            'proyek_id' => [
+                'table' => 'proyeks',
+                'display' => 'nama_proyek',
+                'reference' => 'id',
+                'label' => 'Proyek',
+            ],
+            'kavling_id' => [
+                'table' => 'kavlings',
+                'display' => 'kode_kavling',
+                'reference' => 'id_kavling',
+                'label' => 'Kavling',
+            ],
+            'konsumen_id' => [
+                'table' => 'konsumens',
+                'display' => 'nama_konsumen',
+                'reference' => 'id_konsumen',
+                'label' => 'Konsumen',
+            ],
+            'bank_id' => [
+                'table' => 'banks',
+                'display' => 'bank',
+                'reference' => 'id_bank',
+                'label' => 'Bank',
+            ],
+        ];
+    }
+
     protected function getHeaderActions(): array
     {
         return [

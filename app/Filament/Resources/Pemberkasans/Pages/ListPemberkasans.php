@@ -13,6 +13,18 @@ class ListPemberkasans extends ListRecords
 
     protected static string $resource = PemberkasanResource::class;
 
+    protected function getExportRelations(): array
+    {
+        return [
+            'id_kavling' => [
+                'table' => 'kavlings',
+                'display' => 'kode_kavling',
+                'reference' => 'id_kavling',
+                'label' => 'Kavling',
+            ],
+        ];
+    }
+
     protected function getHeaderActions(): array
     {
         return [

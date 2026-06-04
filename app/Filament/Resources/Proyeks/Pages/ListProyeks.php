@@ -13,6 +13,18 @@ class ListProyeks extends ListRecords
 
     protected static string $resource = ProyekResource::class;
 
+    protected function getExportRelations(): array
+    {
+        return [
+            'cabang_id' => [
+                'table' => 'cabangs',
+                'display' => 'nama',
+                'reference' => 'id',
+                'label' => 'Cabang',
+            ],
+        ];
+    }
+
     protected function getHeaderActions(): array
     {
         return [

@@ -13,6 +13,24 @@ class ListPsjbs extends ListRecords
 
     protected static string $resource = PsjbResource::class;
 
+    protected function getExportRelations(): array
+    {
+        return [
+            'id_kavling' => [
+                'table' => 'kavlings',
+                'display' => 'kode_kavling',
+                'reference' => 'id_kavling',
+                'label' => 'Kavling',
+            ],
+            'id_promo' => [
+                'table' => 'promos',
+                'display' => 'nama_promo',
+                'reference' => 'id_promo',
+                'label' => 'Promo',
+            ],
+        ];
+    }
+
     protected function getHeaderActions(): array
     {
         return [
