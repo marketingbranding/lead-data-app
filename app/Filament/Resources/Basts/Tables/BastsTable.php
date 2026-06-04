@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Basts\Tables;
 
 use App\Services\MundurService;
 use Filament\Actions\Action;
+use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -67,19 +68,21 @@ class BastsTable
                     )),
             ])
             ->recordActions([
-                EditAction::make()
-                    ->label('')
-                    ->icon('heroicon-m-pencil-square'),
-                Action::make('mundur')
-                    ->label('')
-                    ->icon('heroicon-o-arrow-left-circle')
-                    ->color('danger')
-                    ->tooltip('Mundur')
-                    ->requiresConfirmation()
-                    ->modalHeading('Mundurkan Proses')
-                    ->modalDescription('Apakah Anda yakin ingin memundurkan proses ini? Konsumen akan ditandai sebagai mundur.')
-                    ->visible(fn ($record) => $record->kavling?->konsumens()->where('status_konsumen', 'aktif')->exists())
-                    ->action(fn ($record) => app(MundurService::class)->mundurkan($record)),
+                ActionGroup::make([
+                    EditAction::make()
+                        ->label('')
+                        ->icon('heroicon-m-pencil-square'),
+                    Action::make('mundur')
+                        ->label('')
+                        ->icon('heroicon-o-arrow-left-circle')
+                        ->color('danger')
+                        ->tooltip('Mundur')
+                        ->requiresConfirmation()
+                        ->modalHeading('Mundurkan Proses')
+                        ->modalDescription('Apakah Anda yakin ingin memundurkan proses ini? Konsumen akan ditandai sebagai mundur.')
+                        ->visible(fn ($record) => $record->kavling?->konsumens()->where('status_konsumen', 'aktif')->exists())
+                        ->action(fn ($record) => app(MundurService::class)->mundurkan($record)),
+                ]),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
