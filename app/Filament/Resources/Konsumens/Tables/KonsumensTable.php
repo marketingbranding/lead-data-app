@@ -55,6 +55,8 @@ class KonsumensTable
                     ->sortable(),
                 TextColumn::make('tahap_terakhir')
                     ->label('Proses Penjualan')
+                    ->getStateUsing(fn ($record) => $record->tahap_terakhir
+                        ?? app(PipelineFlowService::class)->getCurrentStageLabel($record))
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
                         'Selesai' => 'success',
