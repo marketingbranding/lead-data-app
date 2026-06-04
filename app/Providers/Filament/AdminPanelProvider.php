@@ -94,7 +94,13 @@ class AdminPanelProvider extends PanelProvider
 
         FilamentView::registerRenderHook(
             PanelsRenderHook::BODY_END,
-            fn () => app('livewire')->mount('bug-report-widget'),
+            function () {
+                try {
+                    return app('livewire')->mount('bug-report-widget');
+                } catch (\Throwable $e) {
+                    return '<div style="position:fixed;bottom:100px;right:20px;z-index:9999;background:red;padding:15px;color:white">ERROR: ' . htmlspecialchars($e->getMessage()) . '</div>';
+                }
+            },
         );
     }
 }
