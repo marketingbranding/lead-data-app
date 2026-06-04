@@ -5,6 +5,7 @@ namespace App\Filament\Actions;
 use App\Services\ExportService;
 use App\Services\ImportService;
 use Filament\Actions\Action;
+use Filament\Actions\ActionGroup;
 use Filament\Forms\Components\FileUpload;
 use Filament\Notifications\Notification;
 
@@ -18,8 +19,23 @@ trait HasExportImport
     protected function getExportImportActions(): array
     {
         return [
-            $this->getExportAction(),
-            $this->getImportAction(),
+            ActionGroup::make([
+                $this->getExportAction()->name('exportMobile'),
+                $this->getImportAction()->name('importMobile'),
+            ])
+                ->label('Export/Import')
+                ->icon('heroicon-o-document-arrow-down')
+                ->color('gray')
+                ->button()
+                ->extraAttributes(['class' => 'lg:!hidden']),
+
+            $this->getExportAction()
+                ->name('exportDesktop')
+                ->extraAttributes(['class' => 'max-lg:!hidden']),
+
+            $this->getImportAction()
+                ->name('importDesktop')
+                ->extraAttributes(['class' => 'max-lg:!hidden']),
         ];
     }
 
