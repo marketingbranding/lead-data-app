@@ -85,6 +85,7 @@ class BiCheckingsTable
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->modifyQueryUsing(fn ($query) => $query->whereDoesntHave('kavling.psjb'));
     }
 }

@@ -108,6 +108,7 @@ class ProsesBanksTable
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->modifyQueryUsing(fn ($query) => $query->whereDoesntHave('kavling.ppjbDev'));
     }
 }

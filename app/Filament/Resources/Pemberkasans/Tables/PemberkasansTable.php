@@ -108,6 +108,9 @@ class PemberkasansTable
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->modifyQueryUsing(fn ($query) => $query->whereDoesntHave('kavling', fn ($q) =>
+                $q->whereHas('prosesBank')->orWhereHas('ppjbDev')
+            ));
     }
 }

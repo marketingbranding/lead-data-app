@@ -93,6 +93,7 @@ class AkadsTable
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->modifyQueryUsing(fn ($query) => $query->whereDoesntHave('kavling.bast'));
     }
 }

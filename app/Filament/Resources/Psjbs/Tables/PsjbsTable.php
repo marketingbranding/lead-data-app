@@ -92,6 +92,7 @@ class PsjbsTable
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->modifyQueryUsing(fn ($query) => $query->whereDoesntHave('kavling.pemberkasan'));
     }
 }

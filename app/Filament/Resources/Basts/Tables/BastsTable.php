@@ -86,5 +86,6 @@ class BastsTable
                     DeleteBulkAction::make(),
                 ]),
             ]);
+            // Bast adalah stage terakhir — tidak perlu filter
     }
 }
