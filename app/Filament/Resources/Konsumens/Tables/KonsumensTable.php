@@ -88,15 +88,22 @@ class KonsumensTable
                             ->when($data['cabang_id'] ?? null, fn ($q, $v) => $q->where('cabang_id', $v))
                             ->when($data['proyek_id'] ?? null, fn ($q, $v) => $q->where('proyek_id', $v))
                     )),
-                Select::make('status_konsumen')
-                    ->label('Status Konsumen')
-                    ->options([
-                        'aktif' => 'Aktif',
-                        'batal' => 'Batal',
-                        'mundur' => 'Mundur',
+                Filter::make('status_konsumen')
+                    ->form([
+                        Select::make('status_konsumen')
+                            ->label('Status Konsumen')
+                            ->options([
+                                'aktif' => 'Aktif',
+                                'batal' => 'Batal',
+                                'mundur' => 'Mundur',
+                            ])
+                            ->placeholder('Semua Status')
+                            ->native(false),
                     ])
-                    ->placeholder('Semua Status')
-                    ->native(false),
+                    ->query(fn ($query, $data) => $data['status_konsumen']
+                        ? $query->where('status_konsumen', $data['status_konsumen'])
+                        : $query
+                    ),
             ])
             ->recordActions([
                 EditAction::make()
