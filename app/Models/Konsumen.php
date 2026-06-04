@@ -25,8 +25,10 @@ class Konsumen extends Model
         'nama_kondar',
         'no_hp_kondar',
         'status_cash',
+        'status_konsumen',
         'status_data',
         'keterangan',
+        'tahap_terakhir',
     ];
 
     protected $casts = [

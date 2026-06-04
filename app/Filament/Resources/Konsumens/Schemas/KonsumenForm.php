@@ -94,6 +94,14 @@ class KonsumenForm
                         'YA' => 'Cash',
                     ])
                     ->native(false),
+                Placeholder::make('status_konsumen')
+                    ->label('Status Konsumen')
+                    ->content(fn ($record) => new HtmlString(match ($record?->status_konsumen) {
+                        'aktif' => '<span style="color:#16a34a;font-weight:bold">Aktif</span>',
+                        'batal' => '<span style="color:#dc2626;font-weight:bold">Batal</span>',
+                        'mundur' => '<span style="color:#d97706;font-weight:bold">Mundur</span>',
+                        default => '<span style="color:#6b7280;font-weight:bold">-</span>',
+                    })),
                 Placeholder::make('status_data')
                     ->label('Status Data')
                     ->content(fn ($get) => new HtmlString(

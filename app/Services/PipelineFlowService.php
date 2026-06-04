@@ -20,7 +20,10 @@ class PipelineFlowService
     {
         $kavling = $record->kavling;
         if (!$kavling) {
-            return 'Konsumen Baru';
+            $label = 'Konsumen Baru';
+            $record->tahap_terakhir = $label;
+            $record->saveQuietly();
+            return $label;
         }
 
         $chain = $record->status_cash === 'YA'
@@ -51,30 +54,46 @@ class PipelineFlowService
 
         $hasAnyStage = collect($relationMap)->contains(fn ($rel) => $kavling->$rel !== null);
         if (!$hasAnyStage) {
-            return 'Konsumen Baru';
+            $label = 'Konsumen Baru';
+            $record->tahap_terakhir = $label;
+            $record->saveQuietly();
+            return $label;
         }
 
         foreach ($chain as $stageClass => $stageLabel) {
             $existing = $kavling->{$relationMap[$stageClass]};
 
             if (!$existing) {
+                $record->tahap_terakhir = $stageLabel;
+                $record->saveQuietly();
                 return $stageLabel;
             }
 
             if ($stageClass === ProsesBank::class && in_array($existing->jenis_respon, ['Reject', 'Revisi'])) {
-                return 'Proses Bank (Berhenti)';
+                $label = 'Proses Bank (Berhenti)';
+                $record->tahap_terakhir = $label;
+                $record->saveQuietly();
+                return $label;
             }
 
             if ($stageClass === Pemberkasan::class && $existing->revisiPemberkasans()->where('status', 'pending')->exists()) {
-                return 'Pemberkasan (Berhenti - Revisi)';
+                $label = 'Pemberkasan (Berhenti - Revisi)';
+                $record->tahap_terakhir = $label;
+                $record->saveQuietly();
+                return $label;
             }
 
             if ($existing->status_data !== 'Data Lengkap') {
+                $record->tahap_terakhir = $stageLabel;
+                $record->saveQuietly();
                 return $stageLabel;
             }
         }
 
-        return 'Selesai';
+        $label = 'Selesai';
+        $record->tahap_terakhir = $label;
+        $record->saveQuietly();
+        return $label;
     }
 
     public function getNextStageForKonsumen(Konsumen $record): ?string

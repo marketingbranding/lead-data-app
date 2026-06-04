@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Konsumens\Tables;
 
+use App\Services\MundurService;
 use App\Services\PipelineFlowService;
 use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
@@ -31,20 +32,37 @@ class KonsumensTable
                     ->color(fn (string $state): string => $state === 'YA' ? 'warning' : 'primary')
                     ->formatStateUsing(fn (string $state): string => $state === 'YA' ? 'Cash' : 'KPR')
                     ->sortable(),
+                TextColumn::make('status_konsumen')
+                    ->label('Status Konsumen')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'aktif' => 'success',
+                        'batal' => 'danger',
+                        'mundur' => 'warning',
+                        default => 'gray',
+                    })
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                        'aktif' => 'Aktif',
+                        'batal' => 'Batal',
+                        'mundur' => 'Mundur',
+                        default => $state,
+                    })
+                    ->sortable(),
                 TextColumn::make('status_data')
                     ->label('Status Data')
                     ->badge()
                     ->color(fn (string $state): string => $state === 'Data Lengkap' ? 'success' : 'danger')
                     ->sortable(),
-                TextColumn::make('current_stage')
+                TextColumn::make('tahap_terakhir')
                     ->label('Proses Penjualan')
-                    ->getStateUsing(fn ($record) => app(PipelineFlowService::class)->getCurrentStageLabel($record))
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
                         'Selesai' => 'success',
                         'Konsumen Baru' => 'gray',
                         default => 'warning',
-                    }),
+                    })
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('created_at')->dateTime()->sortable()->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
@@ -70,9 +88,29 @@ class KonsumensTable
                             ->when($data['cabang_id'] ?? null, fn ($q, $v) => $q->where('cabang_id', $v))
                             ->when($data['proyek_id'] ?? null, fn ($q, $v) => $q->where('proyek_id', $v))
                     )),
+                Select::make('status_konsumen')
+                    ->label('Status Konsumen')
+                    ->options([
+                        'aktif' => 'Aktif',
+                        'batal' => 'Batal',
+                        'mundur' => 'Mundur',
+                    ])
+                    ->placeholder('Semua Status')
+                    ->native(false),
             ])
             ->recordActions([
-                EditAction::make(),
+                EditAction::make()
+                    ->icon('heroicon-m-pencil-square'),
+                Action::make('mundur')
+                    ->label('')
+                    ->icon('heroicon-o-arrow-left-circle')
+                    ->color('danger')
+                    ->tooltip('Mundur')
+                    ->requiresConfirmation()
+                    ->modalHeading('Mundurkan Proses')
+                    ->modalDescription('Apakah Anda yakin ingin memundurkan proses ini? Konsumen akan ditandai sebagai mundur.')
+                    ->visible(fn ($record) => $record->status_konsumen === 'aktif')
+                    ->action(fn ($record) => app(MundurService::class)->mundurkan($record)),
                 Action::make('lanjutTahap')
                     ->label(fn ($record) => app(PipelineFlowService::class)->getNextStageLabel($record))
                     ->icon('heroicon-o-arrow-right-circle')

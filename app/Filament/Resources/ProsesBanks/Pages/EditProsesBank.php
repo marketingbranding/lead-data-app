@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\ProsesBanks\Pages;
 
 use App\Filament\Resources\ProsesBanks\ProsesBankResource;
+use App\Services\MundurService;
 use App\Services\PipelineFlowService;
 use Filament\Actions\Action;
 use Filament\Actions\DeleteAction;
@@ -18,6 +19,18 @@ class EditProsesBank extends EditRecord
 
         return [
             DeleteAction::make(),
+            Action::make('mundur')
+                ->label('Mundur')
+                ->icon('heroicon-o-arrow-left-circle')
+                ->color('danger')
+                ->requiresConfirmation()
+                ->modalHeading('Mundurkan Proses')
+                ->modalDescription('Apakah Anda yakin ingin memundurkan proses ini? Konsumen akan ditandai sebagai mundur.')
+                ->visible(fn (): bool => $this->record->kavling?->konsumens()->where('status_konsumen', 'aktif')->exists())
+                ->action(function () {
+                    app(MundurService::class)->mundurkan($this->record);
+                    $this->redirect(ProsesBankResource::getUrl('index'));
+                }),
             Action::make('resubmit')
                 ->label('Resubmit')
                 ->icon('heroicon-o-arrow-path')
