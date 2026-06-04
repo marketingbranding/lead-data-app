@@ -9,3 +9,15 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+@media (width >= 1024px) {
+    .hide-desktop {
+        display: none !important;
+    }
+}
+
+@media (width < 1024px) {
+    .hide-mobile {
+        display: none !important;
+    }
+}

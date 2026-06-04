@@ -27,15 +27,15 @@ trait HasExportImport
                 ->icon('heroicon-o-document-arrow-down')
                 ->color('gray')
                 ->button()
-                ->extraAttributes(['class' => 'lg:!hidden']),
+                ->extraAttributes(['class' => 'hide-desktop']),
 
             $this->getExportAction()
                 ->name('exportDesktop')
-                ->extraAttributes(['class' => 'max-lg:!hidden']),
+                ->extraAttributes(['class' => 'hide-mobile']),
 
             $this->getImportAction()
                 ->name('importDesktop')
-                ->extraAttributes(['class' => 'max-lg:!hidden']),
+                ->extraAttributes(['class' => 'hide-mobile']),
         ];
     }
 
