@@ -22,6 +22,10 @@ class ProsesBanksTable
         return $table
             ->columns([
                 TextColumn::make('id_kavling')->sortable()->searchable(),
+                TextColumn::make('konsumen')
+                    ->label('Konsumen')
+                    ->getStateUsing(fn ($record) => $record->kavling?->konsumens()->where('status_konsumen', 'aktif')->first()?->nama_konsumen)
+                    ->toggleable(),
                 TextColumn::make('no_sp3k')->sortable()->searchable(),
                 TextColumn::make('jenis_respon')
                     ->badge()
@@ -81,6 +85,7 @@ class ProsesBanksTable
             ])
             ->recordActions([
                 EditAction::make()
+                    ->label('')
                     ->icon('heroicon-m-pencil-square'),
                 Action::make('mundur')
                     ->label('')

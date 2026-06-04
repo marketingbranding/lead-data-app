@@ -100,6 +100,7 @@ class KonsumensTable
             ])
             ->recordActions([
                 EditAction::make()
+                    ->label('')
                     ->icon('heroicon-m-pencil-square'),
                 Action::make('mundur')
                     ->label('')

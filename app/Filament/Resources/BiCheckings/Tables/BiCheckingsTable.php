@@ -22,6 +22,10 @@ class BiCheckingsTable
         return $table
             ->columns([
                 TextColumn::make('id_kavling')->sortable()->searchable(),
+                TextColumn::make('konsumen')
+                    ->label('Konsumen')
+                    ->getStateUsing(fn ($record) => $record->kavling?->konsumens()->where('status_konsumen', 'aktif')->first()?->nama_konsumen)
+                    ->toggleable(),
                 TextColumn::make('no_ktp')->sortable()->searchable(),
                 TextColumn::make('tanggal_slik')->date()->sortable(),
                 TextColumn::make('hasil_slik')->sortable()->searchable(),
@@ -58,6 +62,7 @@ class BiCheckingsTable
             ])
             ->recordActions([
                 EditAction::make()
+                    ->label('')
                     ->icon('heroicon-m-pencil-square'),
                 Action::make('mundur')
                     ->label('')

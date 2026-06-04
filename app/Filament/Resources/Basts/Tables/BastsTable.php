@@ -21,6 +21,10 @@ class BastsTable
         return $table
             ->columns([
                 TextColumn::make('id_kavling')->sortable()->searchable(),
+                TextColumn::make('konsumen')
+                    ->label('Konsumen')
+                    ->getStateUsing(fn ($record) => $record->kavling?->konsumens()->where('status_konsumen', 'aktif')->first()?->nama_konsumen)
+                    ->toggleable(),
                 TextColumn::make('jenis_pipeline')
                     ->badge()
                     ->color(fn (string $state): string => $state === 'CASH' ? 'warning' : 'primary')
@@ -64,6 +68,7 @@ class BastsTable
             ])
             ->recordActions([
                 EditAction::make()
+                    ->label('')
                     ->icon('heroicon-m-pencil-square'),
                 Action::make('mundur')
                     ->label('')

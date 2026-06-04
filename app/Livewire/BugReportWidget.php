@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\BugReport;
 use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class BugReportWidget extends Component
@@ -52,42 +53,56 @@ class BugReportWidget extends Component
     {
         $webhookUrl = config('services.discord.bug_report_webhook');
         if (!$webhookUrl) {
+            Log::warning('Discord webhook URL not configured');
             return;
         }
 
-        $user = $report->user;
-        $cabang = $user?->cabang?->nama ?? '-';
+        try {
+            $user = $report->user;
+            $cabang = $user?->cabang?->nama ?? '-';
 
-        $prioritasEmoji = match ($report->prioritas) {
-            'rendah' => '🟢',
-            'sedang' => '🟡',
-            'tinggi' => '🟠',
-            'kritis' => '🔴',
-            default => '⚪',
-        };
+            $prioritasEmoji = match ($report->prioritas) {
+                'rendah' => '🟢',
+                'sedang' => '🟡',
+                'tinggi' => '🟠',
+                'kritis' => '🔴',
+                default => '⚪',
+            };
 
-        Http::post($webhookUrl, [
-            'embeds' => [[
-                'title' => $report->judul,
-                'description' => $report->deskripsi,
-                'color' => match ($report->prioritas) {
-                    'rendah' => 5763719,
-                    'sedang' => 16776960,
-                    'tinggi' => 15105570,
-                    'kritis' => 15548997,
-                    default => 9807270,
-                },
-                'fields' => [
-                    ['name' => 'Cabang', 'value' => $cabang, 'inline' => true],
-                    ['name' => 'Pelapor', 'value' => $user?->name ?? '-', 'inline' => true],
-                    ['name' => 'Prioritas', 'value' => "$prioritasEmoji {$report->prioritas}", 'inline' => true],
-                    ['name' => 'Status', 'value' => $report->status, 'inline' => true],
-                    ['name' => 'Waktu', 'value' => $report->created_at->format('d M Y H:i'), 'inline' => true],
-                ],
-                'footer' => ['text' => 'Bug Report • OASIS'],
-                'timestamp' => $report->created_at->toIso8601String(),
-            ]],
-        ]);
+            $response = Http::timeout(10)->post($webhookUrl, [
+                'embeds' => [[
+                    'title' => $report->judul,
+                    'description' => $report->deskripsi,
+                    'color' => match ($report->prioritas) {
+                        'rendah' => 5763719,
+                        'sedang' => 16776960,
+                        'tinggi' => 15105570,
+                        'kritis' => 15548997,
+                        default => 9807270,
+                    },
+                    'fields' => [
+                        ['name' => 'Cabang', 'value' => $cabang, 'inline' => true],
+                        ['name' => 'Pelapor', 'value' => $user?->name ?? '-', 'inline' => true],
+                        ['name' => 'Prioritas', 'value' => "$prioritasEmoji {$report->prioritas}", 'inline' => true],
+                        ['name' => 'Status', 'value' => $report->status, 'inline' => true],
+                        ['name' => 'Waktu', 'value' => $report->created_at->format('d M Y H:i'), 'inline' => true],
+                    ],
+                    'footer' => ['text' => 'Bug Report • OASIS'],
+                    'timestamp' => $report->created_at->toIso8601String(),
+                ]],
+            ]);
+
+            if (!$response->successful()) {
+                Log::warning('Discord webhook responded with error', [
+                    'status' => $response->status(),
+                    'body' => $response->body(),
+                ]);
+            }
+        } catch (\Exception $e) {
+            Log::error('Discord webhook exception', [
+                'message' => $e->getMessage(),
+            ]);
+        }
     }
 
     public function render()

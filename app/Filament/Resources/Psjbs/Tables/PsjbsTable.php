@@ -22,6 +22,10 @@ class PsjbsTable
         return $table
             ->columns([
                 TextColumn::make('id_kavling')->sortable()->searchable(),
+                TextColumn::make('konsumen')
+                    ->label('Konsumen')
+                    ->getStateUsing(fn ($record) => $record->kavling?->konsumens()->where('status_konsumen', 'aktif')->first()?->nama_konsumen)
+                    ->toggleable(),
                 TextColumn::make('nama_koordinator')->sortable()->searchable(),
                 TextColumn::make('nama_sales')->sortable()->searchable(),
                 TextColumn::make('tanggal_psjb')->date()->sortable(),
@@ -65,6 +69,7 @@ class PsjbsTable
             ])
             ->recordActions([
                 EditAction::make()
+                    ->label('')
                     ->icon('heroicon-m-pencil-square'),
                 Action::make('mundur')
                     ->label('')
