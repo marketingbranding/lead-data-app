@@ -57,6 +57,11 @@ class BugReportWidget extends Component
             return;
         }
 
+        Log::info('Sending bug report to Discord', [
+            'report_id' => $report->id,
+            'judul' => $report->judul,
+        ]);
+
         try {
             $user = $report->user;
             $cabang = $user?->cabang?->nama ?? '-';
@@ -69,7 +74,7 @@ class BugReportWidget extends Component
                 default => '⚪',
             };
 
-            $response = Http::timeout(10)->post($webhookUrl, [
+            $response = Http::timeout(10)->withoutVerifying()->post($webhookUrl, [
                 'embeds' => [[
                     'title' => $report->judul,
                     'description' => $report->deskripsi,
