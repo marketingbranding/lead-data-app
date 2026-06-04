@@ -9,7 +9,6 @@ use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Support\Facades\FilamentView;
 use Filament\View\PanelsRenderHook;
 use App\Filament\Pages\Dashboard;
-use App\Filament\Widgets\BugReportWidget;
 use App\Filament\Widgets\PipelineFunnelWidget;
 use App\Filament\Widgets\StatsOverviewWidget;
 use Filament\Panel;
@@ -32,6 +31,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
+            ->globalSearch(false)
             ->brandName('OASIS')
             ->brandLogo(fn () => asset('logo.png'))
             ->brandLogoHeight('2.5rem')
@@ -57,7 +57,6 @@ class AdminPanelProvider extends PanelProvider
             ->widgets([
                 StatsOverviewWidget::class,
                 PipelineFunnelWidget::class,
-                BugReportWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -95,11 +94,22 @@ class AdminPanelProvider extends PanelProvider
         FilamentView::registerRenderHook(
             PanelsRenderHook::BODY_END,
             function () {
-                try {
-                    return app('livewire')->mount('bug-report-widget');
-                } catch (\Throwable $e) {
-                    return '<div style="position:fixed;bottom:100px;right:20px;z-index:9999;background:red;padding:15px;color:white">ERROR: ' . htmlspecialchars($e->getMessage()) . '</div>';
+                if (auth()->user()?->hasRole('super-admin')) {
+                    return '';
                 }
+
+                return app('livewire')->mount('bug-report-widget');
+            },
+        );
+
+        FilamentView::registerRenderHook(
+            PanelsRenderHook::TOPBAR_END,
+            function () {
+                if (!auth()->user()?->hasRole('super-admin')) {
+                    return '';
+                }
+
+                return app('livewire')->mount('bug-report-bell');
             },
         );
     }
