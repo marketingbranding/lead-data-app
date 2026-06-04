@@ -94,7 +94,7 @@ class AdminPanelProvider extends PanelProvider
 
         FilamentView::registerRenderHook(
             PanelsRenderHook::BODY_END,
-            fn () => view('partials.bug-report'),
+            fn () => app('livewire')->mount('bug-report-widget'),
         );
     }
 }
