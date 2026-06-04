@@ -20,22 +20,13 @@ trait HasExportImport
     {
         return [
             ActionGroup::make([
-                $this->getExportAction()->name('exportMobile'),
-                $this->getImportAction()->name('importMobile'),
+                $this->getExportAction()->name('export'),
+                $this->getImportAction()->name('import'),
             ])
                 ->label('Export/Import')
                 ->icon('heroicon-o-document-arrow-down')
                 ->color('gray')
-                ->button()
-                ->extraAttributes(['class' => 'hide-desktop']),
-
-            $this->getExportAction()
-                ->name('exportDesktop')
-                ->extraAttributes(['class' => 'hide-mobile']),
-
-            $this->getImportAction()
-                ->name('importDesktop')
-                ->extraAttributes(['class' => 'hide-mobile']),
+                ->button(),
         ];
     }
 
