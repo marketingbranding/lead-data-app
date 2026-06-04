@@ -2,12 +2,15 @@
 
 namespace App\Filament\Resources\MarketingLeads\Pages;
 
+use App\Filament\Actions\HasCreateTutupAction;
 use App\Filament\Resources\MarketingLeads\CampaignResource;
 use App\Services\CampaignIdService;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateCampaign extends CreateRecord
 {
+    use HasCreateTutupAction;
+
     protected static string $resource = CampaignResource::class;
 
     protected function mutateFormDataBeforeCreate(array $data): array

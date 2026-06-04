@@ -20,7 +20,7 @@ class PipelineFlowService
     {
         $kavling = $record->kavling;
         if (!$kavling) {
-            return 'Input Konsumen';
+            return 'Konsumen Baru';
         }
 
         $chain = $record->status_cash === 'YA'
@@ -48,6 +48,11 @@ class PipelineFlowService
             Akad::class => 'akad',
             Bast::class => 'bast',
         ];
+
+        $hasAnyStage = collect($relationMap)->contains(fn ($rel) => $kavling->$rel !== null);
+        if (!$hasAnyStage) {
+            return 'Konsumen Baru';
+        }
 
         foreach ($chain as $stageClass => $stageLabel) {
             $existing = $kavling->{$relationMap[$stageClass]};

@@ -22,6 +22,12 @@ class ListPipelineLogs extends ListRecords
                 'reference' => 'id_kavling',
                 'label' => 'Kavling',
             ],
+            'id_konsumen' => [
+                'table' => 'konsumens',
+                'display' => 'nama_konsumen',
+                'reference' => 'id_konsumen',
+                'label' => 'Konsumen',
+            ],
         ];
     }
 

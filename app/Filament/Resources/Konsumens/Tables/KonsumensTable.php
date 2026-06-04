@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Konsumens\Tables;
 
 use App\Services\PipelineFlowService;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -41,7 +42,7 @@ class KonsumensTable
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
                         'Selesai' => 'success',
-                        'Input Konsumen' => 'gray',
+                        'Konsumen Baru' => 'gray',
                         default => 'warning',
                     }),
                 TextColumn::make('created_at')->dateTime()->sortable()->toggleable(isToggledHiddenByDefault: true),
@@ -72,6 +73,12 @@ class KonsumensTable
             ])
             ->recordActions([
                 EditAction::make(),
+                Action::make('lanjutTahap')
+                    ->label(fn ($record) => app(PipelineFlowService::class)->getNextStageLabel($record))
+                    ->icon('heroicon-o-arrow-right-circle')
+                    ->color('success')
+                    ->visible(fn ($record) => $record->status_data === 'Data Lengkap')
+                    ->action(fn ($record) => redirect(app(PipelineFlowService::class)->getNextStageEditUrl($record))),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

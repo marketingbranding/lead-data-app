@@ -76,8 +76,13 @@ class PipelineLogObserver
             $previousLog->save();
         }
 
+        $konsumen = \App\Models\Kavling::find($kavlingId)?->konsumens()
+            ->where('status_konsumen', 'aktif')
+            ->first();
+
         PipelineLog::create([
             'id_kavling' => $kavlingId,
+            'id_konsumen' => $konsumen?->id_konsumen,
             'tahap_asal' => $asal,
             'tahap_tujuan' => $stageName,
             'tanggal_masuk' => $now,

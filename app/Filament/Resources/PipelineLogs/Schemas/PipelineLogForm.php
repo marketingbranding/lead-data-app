@@ -17,6 +17,11 @@ class PipelineLogForm
                 TextInput::make('id_kavling')
                     ->required()
                     ->maxLength(50),
+                Select::make('id_konsumen')
+                    ->label('Konsumen')
+                    ->relationship('konsumen', 'nama_konsumen')
+                    ->searchable()
+                    ->preload(),
                 Select::make('tahap_asal')
                     ->searchable()
                     ->options([

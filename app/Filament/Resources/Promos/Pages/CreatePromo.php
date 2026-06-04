@@ -2,10 +2,13 @@
 
 namespace App\Filament\Resources\Promos\Pages;
 
+use App\Filament\Actions\HasCreateTutupAction;
 use App\Filament\Resources\Promos\PromoResource;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreatePromo extends CreateRecord
 {
+    use HasCreateTutupAction;
+
     protected static string $resource = PromoResource::class;
 }

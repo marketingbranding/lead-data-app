@@ -14,6 +14,10 @@ class PipelineLogsTable
     {
         return $table
             ->columns([
+                TextColumn::make('konsumen.nama_konsumen')
+                    ->label('Konsumen')
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('id_kavling')->sortable()->searchable(),
                 TextColumn::make('tahap_asal')->sortable()->searchable(),
                 TextColumn::make('tahap_tujuan')->sortable()->searchable(),

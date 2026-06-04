@@ -11,6 +11,7 @@ class PipelineLog extends Model
 
     protected $fillable = [
         'id_kavling',
+        'id_konsumen',
         'tahap_asal',
         'tahap_tujuan',
         'tanggal_masuk',
@@ -28,5 +29,10 @@ class PipelineLog extends Model
     public function kavling()
     {
         return $this->belongsTo(Kavling::class, 'id_kavling', 'id_kavling');
+    }
+
+    public function konsumen()
+    {
+        return $this->belongsTo(Konsumen::class, 'id_konsumen', 'id_konsumen');
     }
 }

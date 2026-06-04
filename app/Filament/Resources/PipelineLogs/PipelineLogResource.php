@@ -21,6 +21,12 @@ class PipelineLogResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClock;
 
+    protected static ?string $navigationLabel = 'Log Proses';
+
+    protected static ?string $pluralModelLabel = 'Log Proses';
+
+    protected static ?string $modelLabel = 'Log Proses';
+
     protected static ?string $recordTitleAttribute = 'id_kavling';
 
     protected static UnitEnum|string|null $navigationGroup = 'Penjualan & Marketing';

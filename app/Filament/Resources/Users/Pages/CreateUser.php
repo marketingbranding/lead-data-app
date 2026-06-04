@@ -2,10 +2,13 @@
 
 namespace App\Filament\Resources\Users\Pages;
 
+use App\Filament\Actions\HasCreateTutupAction;
 use App\Filament\Resources\Users\UserResource;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateUser extends CreateRecord
 {
+    use HasCreateTutupAction;
+
     protected static string $resource = UserResource::class;
 }

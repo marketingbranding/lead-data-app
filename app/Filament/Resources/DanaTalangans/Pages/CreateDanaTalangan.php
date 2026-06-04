@@ -2,12 +2,15 @@
 
 namespace App\Filament\Resources\DanaTalangans\Pages;
 
+use App\Filament\Actions\HasCreateTutupAction;
 use App\Filament\Resources\DanaTalangans\DanaTalanganResource;
 use Carbon\Carbon;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateDanaTalangan extends CreateRecord
 {
+    use HasCreateTutupAction;
+
     protected static string $resource = DanaTalanganResource::class;
 
     protected function mutateFormDataBeforeCreate(array $data): array

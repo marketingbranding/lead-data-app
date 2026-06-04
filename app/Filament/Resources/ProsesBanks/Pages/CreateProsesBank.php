@@ -2,10 +2,13 @@
 
 namespace App\Filament\Resources\ProsesBanks\Pages;
 
+use App\Filament\Actions\HasCreateTutupAction;
 use App\Filament\Resources\ProsesBanks\ProsesBankResource;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateProsesBank extends CreateRecord
 {
+    use HasCreateTutupAction;
+
     protected static string $resource = ProsesBankResource::class;
 }
