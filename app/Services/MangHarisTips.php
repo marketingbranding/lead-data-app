@@ -45,10 +45,10 @@ class MangHarisTips
         $tips = [
             'Mang Haris ngintip... Eh, lagi serius banget yak! 👍',
             'Jangan lupa minum, nanti dehidrasi pas ngurus berkas! 💧',
-            'Psst... Mang Haris denger kamu jagoan ngurus pipeline!',
+            'Tahukah kamu? Di Venus, satu hari lebih panjang dari satu tahun. Venus butuh 243 hari buat mutar poros, tapi cuma 225 hari buat ngelilingin Matahari!',
             'Tahukah kamu? Mang Haris juga suka kopi. Tapi lebih suka lihat kamu rapiin data.',
             'Warning: Terlalu lama di depan komputer. Istirahat bentar, yuk!',
-            'Mang Haris mau cerita... Eh lupa! Lain kali aja 😅',
+            'Fakta: Palung Mariana sedalam ~11 km. Kalau Gunung Everest ditaruh di dasarnya, puncaknya masih tenggelam 2 km di bawah permukaan laut!',
             'Udah berapa konsumen yang kamu proses hari ini? Keren! 🔥',
             'Fun fact: rata-rata Akad selesai 14 hari. Kamu bisa lebih cepat!',
             'Coba tebak Mang Haris lagi ngapain? Jawab: ngawasin kamu kerja. Bangga! 🫡',
@@ -58,9 +58,13 @@ class MangHarisTips
             'Pro tip: kopi enak bikin entry data makin semangat ☕',
             'Mang Haris lagi diet... Pantang lihat data kosong! Isi dong! 😤',
             'Kamu tahu? Mang Haris bangga punya tim kayak kamu!',
-            'Sedang mikir? Mang Haris juga. Tapi kamu pasti bisa selesaiin! 💪',
-            'Hari ini cuaca panas? Tenang, Mang Haris support dari sini! 🥵',
-            'Jangan lupa solat ya, rezeki berkah berkah! 🕌',
+            'Tip admin: tekan Ctrl+Shift+V buat paste tanpa format. Percaya deh, bakal nyelametin kamu dari formatting kacau!',
+            'Fakta: Di Jupiter dan Saturnus, hujannya bukan air, tapi berlian! Tekanan atmosfernya mengubah karbon jadi kristal berlian.',
+            'Tahu gak? Voyager 1 membawa Golden Record berisi suara deburan ombak, sapaan 55 bahasa, dan lagu gamelan Jawa. Mungkin alien dengerin gamelan sekarang! 😄',
+            'Kenapa ayam kalo berkokok matanya merem? Soalnya udah hafal liriknya! 🐔',
+            'Burung, burung apa yang suka nolak? Burung gakgak.',
+            'Kenapa komputer kedinginan? Soalnya windows-nya kebuka! 🪟',
+            'Gula, gula apa yang bukan gula? Gula aren\'t',
         ];
 
         return $tips[array_rand($tips)];

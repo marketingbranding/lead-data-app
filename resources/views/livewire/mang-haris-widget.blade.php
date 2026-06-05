@@ -90,10 +90,9 @@
     {{-- Avatar --}}
     <img
         x-on:click="showItem = false; resetTimer()"
-        src="{{ asset('svg/mang-haris.svg') }}"
+        src="{{ asset('png/mang-haris.png') }}"
         alt="Mang Haris"
         style="width: auto; height: 30rem; cursor: pointer; transform: rotate(30deg);"
-        onerror="this.outerHTML='<svg xmlns=\'http://www.w3.org/2000/svg\' style=\'width:auto;height:30rem;transform:rotate(30deg)\' viewBox=\'0 0 100 100\' fill=\'none\'><circle cx=\'50\' cy=\'45\' r=\'30\' fill=\'#fbbf24\'/><circle cx=\'38\' cy=\'40\' r=\'3\' fill=\'#1f2937\'/><circle cx=\'62\' cy=\'40\' r=\'3\' fill=\'#1f2937\'/><path d=\'M35 55 Q50 65 65 55\' stroke=\'#1f2937\' stroke-width=\'2.5\' fill=\'none\' stroke-linecap=\'round\'/><rect x=\'20\' y=\'70\' width=\'60\' height=\'25\' rx=\'8\' fill=\'#d97706\'/></svg>'"
     />
 </div>
 <style>
