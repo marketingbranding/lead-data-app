@@ -11,24 +11,32 @@ class MangHarisWidget extends Component
 
     public string $tip = '';
 
-    public string $contextual = '';
-
     public function mount(): void
     {
         $user = auth()->user();
         $this->muted = $user?->mangharis_muted ?? false;
-        $this->contextual = MangHarisTips::contextual(request()->route()?->getName() ?? '') ?? '';
-        $this->tip = MangHarisTips::randomNyeleneh();
+        $this->pickTip();
     }
 
     public function showTip(): void
     {
-        $this->tip = MangHarisTips::randomNyeleneh();
+        $this->pickTip();
         $this->dispatch('tip-ready');
     }
 
-    public function render()
+    private function pickTip(): void
     {
+        $this->tip = random_int(0, 1)
+            ? MangHarisTips::randomContextual()
+            : MangHarisTips::randomNyeleneh();
+    }
+
+    public function render(): mixed
+    {
+        if ($this->muted) {
+            return '<div style="display:none;"></div>';
+        }
+
         return view('livewire.mang-haris-widget');
     }
 }

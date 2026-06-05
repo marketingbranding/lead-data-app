@@ -78,12 +78,15 @@ class AdminPanelProvider extends PanelProvider
     {
         FilamentView::registerRenderHook(
             PanelsRenderHook::HEAD_START,
-            fn () => '<style>.fi-wi-chart .fi-section-content { padding: 0.5rem !important; }
+            fn () => "<style>.fi-wi-chart .fi-section-content { padding: 0.5rem !important; }
 .fi-ta-header-toolbar > div:last-child { display: inline-flex; align-items: center; gap: 0.5rem; }
 .fi-ta-filters-dropdown, .fi-ta-filters-modal, .fi-ta-filters-trigger-action-ctn { order: 2 !important; }
 .fi-ta-col-manager-modal, .fi-ta-col-manager-dropdown { order: 1 !important; }
 .fi-simple-header { text-align: center; }
-</style>',
+</style>
+<script>
+(function(){function c(){document.querySelectorAll('.fi-ac-icon-btn-action .fi-badge').forEach(function(b){b.textContent.trim()==='0'&&(b.style.display='none')})}c();(new MutationObserver(c)).observe(document.body,{childList:!0,subtree:!0});document.addEventListener('livewire:navigated',c)})();
+</script>",
         );
 
         FilamentView::registerRenderHook(

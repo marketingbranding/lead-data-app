@@ -4,33 +4,40 @@ namespace App\Services;
 
 class MangHarisTips
 {
+    private static array $contextualTips = [
+        'dashboard' => 'Laporkan bug atau kendala via tombol laporan di kanan bawah ya biar cepat ditangani!',
+        'konsumens' => 'Ada konsumen aktif nih. Cek yang data-nya belum lengkap!',
+        'bi-checkings' => 'BI Checking butuh 3-7 hari. Pantau lead time biar gak kedodoran!',
+        'psjbs' => 'Jangan lupa isi cara pembayaran: FLPP, Cash, atau Cash Bertahap.',
+        'pemberkasans' => 'Tipe pemberkasan: Registrasi, Banding, PIP, Revisi, atau Lengkap.',
+        'proses-banks' => 'Proses bank 14-30 hari. Kalau reject, konsumen otomatis batal.',
+        'ppjb-dev' => 'Tahap PPJB Dev! Pastikan semua dokumen terupload.',
+        'akads' => 'Akad adalah tahap penting! Cek kelengkapan dokumen konsumen.',
+        'basts' => 'BAST — serah terima! Selamat, konsumen segera huni kavlingnya!',
+        'daily-lead' => 'Lead baru perlu segera ditindaklanjuti. Isi laporan harian!',
+        'campaign' => 'Pantau terus campaign marketing biar leads maksimal!',
+        'monitoring-jalans' => 'Monitoring diisi tiap hari Senin, per cabang!',
+        'expenses' => 'Catat pengeluaran detail biar laporan keuangan rapi.',
+        'dana-talangans' => 'Pastikan nominal dan tenor sesuai kesepakatan konsumen.',
+        'kavlings' => 'Cek status kavling sebelum assign ke konsumen baru!',
+        'sales' => 'Data sales perlu diupdate berkala biar akurat.',
+        'lead-times' => 'Lead time yang realistis bikin target makin mudah dicapai!',
+    ];
+
     public static function contextual(string $route): ?string
     {
-        return match (true) {
-            str_contains($route, 'dashboard') => 'Laporkan bug atau kendala via tombol laporan di kanan bawah ya biar cepat ditangani!',
+        foreach (self::$contextualTips as $key => $tip) {
+            if (str_contains($route, $key)) {
+                return $tip;
+            }
+        }
 
-            str_contains($route, 'konsumens') => 'Ada konsumen aktif nih. Cek yang data-nya belum lengkap!',
-            str_contains($route, 'bi-checkings') => 'BI Checking butuh 3-7 hari. Pantau lead time biar gak kedodoran!',
-            str_contains($route, 'psjbs') => 'Jangan lupa isi cara pembayaran: FLPP, Cash, atau Cash Bertahap.',
-            str_contains($route, 'pemberkasans') => 'Tipe pemberkasan: Registrasi, Banding, PIP, Revisi, atau Lengkap.',
-            str_contains($route, 'proses-banks') => 'Proses bank 14-30 hari. Kalau reject, konsumen otomatis batal.',
-            str_contains($route, 'ppjb-dev') => 'Tahap PPJB Dev! Pastikan semua dokumen terupload.',
-            str_contains($route, 'akads') => 'Akad adalah tahap penting! Cek kelengkapan dokumen konsumen.',
-            str_contains($route, 'basts') => 'BAST — serah terima! Selamat, konsumen segera huni kavlingnya!',
+        return null;
+    }
 
-            str_contains($route, 'daily-lead') => 'Lead baru perlu segera ditindaklanjuti. Isi laporan harian!',
-            str_contains($route, 'campaign') => 'Pantau terus campaign marketing biar leads maksimal!',
-            str_contains($route, 'monitoring-jalans') => 'Monitoring diisi tiap hari Senin, per cabang!',
-
-            str_contains($route, 'expenses') => 'Catat pengeluaran detail biar laporan keuangan rapi.',
-            str_contains($route, 'dana-talangans') => 'Pastikan nominal dan tenor sesuai kesepakatan konsumen.',
-
-            str_contains($route, 'kavlings') => 'Cek status kavling sebelum assign ke konsumen baru!',
-            str_contains($route, 'sales') => 'Data sales perlu diupdate berkala biar akurat.',
-            str_contains($route, 'lead-times') => 'Lead time yang realistis bikin target makin mudah dicapai!',
-
-            default => null,
-        };
+    public static function randomContextual(): string
+    {
+        return self::$contextualTips[array_rand(self::$contextualTips)];
     }
 
     public static function randomNyeleneh(): string
