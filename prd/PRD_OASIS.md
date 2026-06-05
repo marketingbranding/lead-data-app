@@ -77,6 +77,9 @@ Proses Penjualan
 └── BAST          → Serah terima unit
 
 Pengeluaran       → Tracking biaya operasional
+
+Widget (semua role)
+└── Mang Haris    → Asisten interaktif (kiri-bawah, popup tips random)
 ```
 
 ### 4.2 Pipeline KPR Subsidi
@@ -262,7 +265,21 @@ Serah terima kunci & unit rumah.
 | Dipesan | Warning (kuning) |
 | Terjual | Danger (merah) |
 
-### 4.5 Tracking Pengeluaran
+### 4.5 Mang Haris Widget (Assistant)
+
+Widget asisten interaktif bergaya Clippy yang muncul di kiri-bawah layar untuk semua user.
+
+| Aspek | Detail |
+|-------|--------|
+| **Karakter** | Mang Haris — karakter maskot dari tim pusat. Avatar PNG (sebelumnya SVG) ukuran 30rem, transparan, rotasi 30°, nongol setengah badan dari kiri-bawah (`bottom: -15rem; left: -8rem`) |
+| **Bubble Chat** | Background `#eddbaf`, border `2px solid #000`, pixel style (`border-radius: 0`, `box-shadow: 2px 2px 0 0 #000`), scanlines CRT overlay, font VT323 (retro terminal), tail segitiga CSS |
+| **Timer** | Popup random 3-7 menit, auto-hide 10 detik. Timer persist antar halaman via `localStorage` (`mangharis_next_show`) — tidak restart saat navigasi |
+| **Tips** | 50:50 random antara **Contextual** (17 tips seputar pipeline & fitur) atau **Nyeleneh** (22 tips: fakta langka tata surya/laut/Voyager, joke bapak-bapak, tip admin, support message). Semua hardcoded di PHP, tidak bocor ke frontend |
+| **Mute** | Superadmin bisa nonaktifkan per user via kolom `mangharis_muted` (boolean) di UserForm |
+| **Implementasi** | Livewire component `MangHarisWidget` di-mount via `PanelsRenderHook::BODY_END` |
+| **File terkait** | `app/Livewire/MangHarisWidget.php`, `app/Services/MangHarisTips.php`, `resources/views/livewire/mang-haris-widget.blade.php`, `public/png/mang-haris.png` |
+
+### 4.6 Tracking Pengeluaran
 
 #### 4.5.1 Kategori Pengeluaran
 
@@ -600,6 +617,8 @@ Setiap pipeline model memiliki `getStatusDataAttribute()` accessor yang mengkomp
 - [x] Auto-mapping id_kavling di seeder (handle format dengan/senza Marison)
 - [x] Revisi sistem (ProsesBank + Pemberkasan): tabel, Repeater, Resubmit workflow
 - [x] Reject otomatis bebas kavling: status_konsumen, SoftDeletes, RejectKavlingObserver
+- [x] Mang Haris assistant widget: avatar, bubble chat, tips kontekstual + nyeleneh, popup random, mute toggle
+- [x] Filter badge 0 hidden: badge angka 0 pada tombol filter disembunyikan (JS MutationObserver + livewire:navigated)
 
 ### Fase 2
 - [ ] Notifikasi otomatis
