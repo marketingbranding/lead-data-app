@@ -48,7 +48,7 @@
             this.autoHideTimer = setTimeout(() => {
                 this.showItem = false;
                 this.scheduleNext();
-            }, 5000);
+            }, 10000);
         },
 
         resetTimer() {
