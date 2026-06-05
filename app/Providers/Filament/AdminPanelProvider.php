@@ -103,6 +103,11 @@ class AdminPanelProvider extends PanelProvider
         );
 
         FilamentView::registerRenderHook(
+            PanelsRenderHook::BODY_END,
+            fn () => app('livewire')->mount('mang-haris-widget'),
+        );
+
+        FilamentView::registerRenderHook(
             PanelsRenderHook::TOPBAR_END,
             function () {
                 if (!auth()->user()?->hasRole('super-admin')) {

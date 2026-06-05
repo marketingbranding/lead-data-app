@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Users\Schemas;
 use App\Models\Cabang;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
 
 class UserForm
@@ -39,6 +40,9 @@ class UserForm
                     ->label('Cabang')
                     ->options(Cabang::orderBy('urutan')->pluck('nama', 'id'))
                     ->native(false),
+                Toggle::make('mangharis_muted')
+                    ->label('Nonaktifkan Mang Haris')
+                    ->helperText('Menyembunyikan karakter Mang Haris dan tips popup'),
             ]);
     }
 }
