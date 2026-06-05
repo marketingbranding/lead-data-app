@@ -9,7 +9,7 @@
 
             window.addEventListener('tip-ready', () => {
                 this.showItem = true;
-                const delay = Math.floor(Math.random() * 11 + 10) * 1000;
+                const delay = (Math.floor(Math.random() * 5 + 3)) * 60 * 1000;
                 localStorage.setItem('mangharis_next_show', (Date.now() + delay).toString());
                 this.startAutoHideTimer();
             });
@@ -38,7 +38,7 @@
 
         scheduleNext() {
             this.clearTimer();
-            const delay = Math.floor(Math.random() * 11 + 10) * 1000;
+            const delay = (Math.floor(Math.random() * 5 + 3)) * 60 * 1000;
             localStorage.setItem('mangharis_next_show', (Date.now() + delay).toString());
             this.timer = setTimeout(() => { $wire.call('showTip'); }, delay);
         },
