@@ -3,6 +3,7 @@
         "id": 1,
         "nama": "Malang",
         "urutan": 1,
+        "google_sheet_id": "1tUbKZwOQ70nDuFZlYGN0A9hQg9I77_LUldxxYTf8BNA",
         "created_at": "2026-05-21 08:44:29",
         "updated_at": "2026-05-21 08:44:29"
     },
@@ -10,6 +11,7 @@
         "id": 2,
         "nama": "Madiun",
         "urutan": 2,
+        "google_sheet_id": "12su1i6R_xHM2mYkO-wwTW8zoSJgoAAGz6Fd_hU8lyhM",
         "created_at": "2026-05-21 08:44:29",
         "updated_at": "2026-05-21 08:44:29"
     },
@@ -17,6 +19,7 @@
         "id": 3,
         "nama": "Solo",
         "urutan": 3,
+        "google_sheet_id": "1YqfRUgXZGX87UxLIrv6Ebg9LBqVyV_Gmy8RZ5ziMwQ0",
         "created_at": "2026-05-21 08:44:29",
         "updated_at": "2026-05-21 08:44:29"
     },
@@ -24,6 +27,7 @@
         "id": 4,
         "nama": "Magelang",
         "urutan": 4,
+        "google_sheet_id": "1EqSNyj29bxXd1fLdkH1JmBfzQttTIqTlRFgpiSd6R1M",
         "created_at": "2026-05-21 08:44:29",
         "updated_at": "2026-05-21 08:44:29"
     },
@@ -31,6 +35,7 @@
         "id": 5,
         "nama": "Purworejo",
         "urutan": 5,
+        "google_sheet_id": "1nqQ4P0NC-pcFtNJvfa93yw-LnB5qFlGVaZP12pJmQR4",
         "created_at": "2026-05-21 08:44:29",
         "updated_at": "2026-05-21 08:44:29"
     },
@@ -38,6 +43,7 @@
         "id": 6,
         "nama": "Purwokerto",
         "urutan": 6,
+        "google_sheet_id": null,
         "created_at": "2026-05-21 08:44:29",
         "updated_at": "2026-05-21 08:44:29"
     },
@@ -45,6 +51,7 @@
         "id": 7,
         "nama": "Jepara",
         "urutan": 7,
+        "google_sheet_id": "1Gn1k0L7WWCoD0GsbSQJuRcxxvoUr16MIjFe7Le3rAg4",
         "created_at": "2026-05-21 08:44:29",
         "updated_at": "2026-05-21 08:44:29"
     },
@@ -52,6 +59,7 @@
         "id": 8,
         "nama": "Pekalongan",
         "urutan": 8,
+        "google_sheet_id": "13Lum588xQcU0ySGlwDkbH5zBFqqFbhgS3TTfLWJrAVM",
         "created_at": "2026-05-21 08:44:29",
         "updated_at": "2026-05-21 08:44:29"
     },
@@ -59,6 +67,7 @@
         "id": 10,
         "nama": "Sumedang",
         "urutan": 9,
+        "google_sheet_id": null,
         "created_at": "2026-05-21 09:02:39",
         "updated_at": "2026-05-21 09:02:39"
     },
@@ -66,6 +75,7 @@
         "id": 11,
         "nama": "Bandung",
         "urutan": 10,
+        "google_sheet_id": "1AdsQAaWpOTKl6n5s5djiTKyg04HI2gBdMsib6TsggR8",
         "created_at": null,
         "updated_at": null
     }

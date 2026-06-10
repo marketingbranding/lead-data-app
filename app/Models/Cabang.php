@@ -11,6 +11,7 @@ class Cabang extends Model
     protected $fillable = [
         'nama',
         'urutan',
+        'google_sheet_id',
     ];
 
     protected $casts = [
